@@ -1,11 +1,15 @@
 package me.kp.moon.moonbans.commands;
 
+import me.kp.moon.moonbans.data.PlayerData;
+import me.kp.moon.moonbans.data.PlayerDataManager;
 import me.kp.moon.moonbans.enums.Messages;
 import me.kp.moon.moonbans.mysql.MySQL;
 import me.kp.moon.moonbans.utils.SysUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.text.DateFormat;
 
@@ -33,6 +37,24 @@ public class Checkmute implements CommandExecutor {
                 sender.sendMessage("§cNão foi possível encontrar esse player no banco de dados.");
                 return true;
             } else {
+                Player target = Bukkit.getPlayer(args[0]);
+                if (target != null) {
+                    PlayerData targetData = PlayerDataManager.getPlayerData(target);
+                    if (targetData == null) {
+                        sender.sendMessage("§cOcorreu um erro ao checar o player §e" + args[0] + "§c.");
+                        return true;
+                    }
+                    if (!targetData.isMuted) {
+                        sender.sendMessage("§cEste player não está mutado.");
+                        return true;
+                    }
+                    long time = targetData.cacheTempMuteTime;
+                    sender.sendMessage("§aInformações sobre o mute do player §e" + args[0] + "§a:\n" +
+                            "§fAutor: §7" + targetData.muteAuthor + "\n" +
+                            "§fMotivo: §7" + targetData.muteReason + "\n" +
+                            "§fData do fim do mute: §7" + (time == -1L ? "§cNUNCA" : SysUtils.timeConverter(time)));
+                    return false;
+                }
                 int isMuted = MySQL.isMuted(args[0], false);
                 if (isMuted == -1) {
                     sender.sendMessage("§cOcorreu um erro ao checar o player §e" + args[0] + "§c.");
@@ -43,8 +65,8 @@ public class Checkmute implements CommandExecutor {
                 }
                 long time = MySQL.getTempBanTime(args[0], false);
                 sender.sendMessage("§aInformações sobre o mute do player §e" + args[0] + "§a:\n" +
-                        "§fAutor: §7" + MySQL.getBanAuthor(args[0], false) + "\n" +
-                        "§fMotivo: §7" + MySQL.getBanReason(args[0], false) + "\n" +
+                        "§fAutor: §7" + MySQL.getMuteAuthor(args[0], false) + "\n" +
+                        "§fMotivo: §7" + MySQL.getMuteReason(args[0], false) + "\n" +
                         "§fData do fim do mute: §7" + (time == -1L ? "§cNUNCA" : SysUtils.timeConverter(time)) + "\n" +
                         "§fData do mute: §7" + DateFormat.getInstance().format(MySQL.getMuteDate(args[0], false)).replace("00:00", ""));
             }
