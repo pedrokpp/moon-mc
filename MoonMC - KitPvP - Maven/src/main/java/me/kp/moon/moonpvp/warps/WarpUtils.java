@@ -89,6 +89,17 @@ public class WarpUtils {
 
     public static void teleportPlayerToWarp(Player player, WarpType warp) {
         player.teleport(warp.getLocation());
+        Bukkit.getOnlinePlayers().forEach(online -> {
+            PlayerData onlineData = PlayerDataManager.getPlayerData(online);
+            if (onlineData != null) {
+                if (!player.hasPermission("command.staffchat")) {
+                    if (!onlineData.admin || !onlineData.superadmin || !onlineData.vanish)
+                        player.showPlayer(online);
+                } else {
+                    player.showPlayer(online);
+                }
+            }
+        });
     }
 
     public static void updateCounts() {
