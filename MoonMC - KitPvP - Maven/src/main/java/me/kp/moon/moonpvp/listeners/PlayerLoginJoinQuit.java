@@ -70,6 +70,13 @@ public class PlayerLoginJoinQuit implements Listener {
         PlayerUtils.changePlayerTag(player, playerData.playerTag, playerData);
         PlayerUtils.sendPlayerToSpawn(player);
         PlayerUtils.giveInitialItems(player);
+        Bukkit.getOnlinePlayers().forEach(online -> {
+            PlayerData onlineData = PlayerDataManager.getPlayerData(online);
+            if (onlineData == null) return;
+            if (onlineData.inDuel) {
+                online.hidePlayer(player);
+            }
+        });
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -120,9 +127,7 @@ public class PlayerLoginJoinQuit implements Listener {
             TextComponent textComponent = new TextComponent("§c§o(SCREENSHARE) O player §e§o" + player.getName() + " §c§odeslogou §c§oem §c§oScreenShare.");
             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" +
                     "§4#pazéosguri §5#vaidarban §6#sheesh").create()));
-            Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> {
-                staffer.sendMessage(textComponent);
-            });
+            Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> staffer.sendMessage(textComponent));
         }
         playerData.setLastTag(player.getDisplayName().replace(player.getName(), "").trim());
         playerData.setUsername(player.getName());

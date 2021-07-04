@@ -94,6 +94,10 @@ public class World implements Listener {
             event.setCancelled(true);
             return;
         }
+        if (playerData.inDuel) {
+            event.setCancelled(true);
+            return;
+        }
         if (playerData.kitType != null || playerData.warpType != null) {
             event.setCancelled(event.getItem().getItemStack().getType() != Material.MUSHROOM_SOUP && event.getItem().getItemStack().getType() != Material.BOWL &&
                     event.getItem().getItemStack().getType() != Material.BROWN_MUSHROOM && event.getItem().getItemStack().getType() != Material.RED_MUSHROOM);
