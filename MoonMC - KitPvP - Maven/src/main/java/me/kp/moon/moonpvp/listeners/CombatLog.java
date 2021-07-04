@@ -1,13 +1,11 @@
 package me.kp.moon.moonpvp.listeners;
 
-import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.kit.KitType;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
 import me.kp.moon.moonpvp.utils.SysUtils;
 import me.kp.moon.moonpvp.warps.WarpType;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

@@ -4,7 +4,6 @@ import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
-import me.kp.moon.moonpvp.warps.WarpType;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

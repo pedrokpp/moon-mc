@@ -1,6 +1,5 @@
 package me.kp.moon.moonpvp.utils;
 
-import me.kp.moon.moonpvp.data.PlayerData;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;

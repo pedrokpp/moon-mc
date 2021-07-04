@@ -1,12 +1,13 @@
 package me.kp.moon.moonpvp.utils;
 
-import java.net.*;
-import javax.net.ssl.*;
+import javax.net.ssl.HttpsURLConnection;
 import java.awt.*;
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.List;
+import java.util.*;
 
 public class DiscordWebhook {
 

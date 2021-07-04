@@ -3,7 +3,6 @@ package me.kp.moon.moonpvp.warps.listeners;
 import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
-import me.kp.moon.moonpvp.listeners.PlayerKill;
 import me.kp.moon.moonpvp.utils.ItemUtils;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
 import me.kp.moon.moonpvp.warps.WarpType;

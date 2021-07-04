@@ -5,7 +5,6 @@ import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.kit.GladiatorUtils;
 import me.kp.moon.moonpvp.kit.KitType;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

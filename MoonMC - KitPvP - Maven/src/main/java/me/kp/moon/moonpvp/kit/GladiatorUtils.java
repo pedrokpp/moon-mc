@@ -1,7 +1,5 @@
 package me.kp.moon.moonpvp.kit;
 
-import me.kp.moon.moonpvp.data.PlayerData;
-import me.kp.moon.moonpvp.data.PlayerDataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

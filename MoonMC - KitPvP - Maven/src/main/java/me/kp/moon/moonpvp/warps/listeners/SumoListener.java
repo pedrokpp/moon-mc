@@ -3,22 +3,17 @@ package me.kp.moon.moonpvp.warps.listeners;
 import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
-import me.kp.moon.moonpvp.listeners.PlayerKill;
 import me.kp.moon.moonpvp.utils.ItemUtils;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
 import me.kp.moon.moonpvp.warps.WarpType;
 import me.kp.moon.moonpvp.warps.WarpUtils;
-import net.minecraft.server.v1_8_R3.PacketPlayInClientCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -28,7 +23,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 public class SumoListener implements Listener {
 
