@@ -26,7 +26,7 @@ public class SpecialistListener implements Listener {
         PlayerData damagerData = PlayerDataManager.getPlayerData(damager);
         if (damagerData == null) return;
         if (damagerData.kitType != KitType.SPECIALIST) return;
-        if (event.getDamage() > player.getHealth()) {
+        if (event.getDamage() >= player.getHealth()) {
             damager.getInventory().forEach(item -> {
                 if (item != null) {
                     if (item.getType() == Material.STONE_SWORD) {
