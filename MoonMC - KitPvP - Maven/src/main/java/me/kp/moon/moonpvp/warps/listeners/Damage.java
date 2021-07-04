@@ -18,16 +18,18 @@ public class Damage implements Listener {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         if (playerData == null) return;
         if (playerData.warpType != null) {
-        if (event.getCause() == EntityDamageEvent.DamageCause.VOID) event.setDamage(21.0);
+            if (event.getCause() == EntityDamageEvent.DamageCause.VOID) event.setDamage(21.0);
             if (playerData.warpType == WarpType.FPS && player.getLocation().getY() >= 81) event.setCancelled(true);
             if (playerData.warpType == WarpType.FISHERMAN) {
                 if (player.getLocation().getY() >= 117) event.setCancelled(true);
                 if (event.getCause() != EntityDamageEvent.DamageCause.FIRE_TICK && event.getCause() != EntityDamageEvent.DamageCause.LAVA &&
-                        event.getCause() != EntityDamageEvent.DamageCause.FIRE && event.getCause() != EntityDamageEvent.DamageCause.VOID) event.setDamage(0);
+                        event.getCause() != EntityDamageEvent.DamageCause.FIRE && event.getCause() != EntityDamageEvent.DamageCause.VOID)
+                    event.setDamage(0);
             }
-            if (playerData.warpType == WarpType.KB){
+            if (playerData.warpType == WarpType.KB) {
                 if (player.getLocation().getY() >= 88) event.setCancelled(true);
-                if (event.getCause() == EntityDamageEvent.DamageCause.FALL) event.setDamage(0);
+                if (event.getCause() == EntityDamageEvent.DamageCause.FALL ||
+                        event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) event.setDamage(0);
             }
         }
     }
