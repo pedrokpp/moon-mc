@@ -43,6 +43,7 @@ public class _1v1Listener implements Listener {
         player.teleport(firstDuelLoc);
         target.teleport(secondDuelLoc);
     }
+
     private void giveDuelItems(Player player) {
         player.closeInventory();
         Inventory inv = player.getInventory();
@@ -52,6 +53,7 @@ public class _1v1Listener implements Listener {
             inv.addItem(new ItemStack(Material.MUSHROOM_SOUP));
         }
     }
+
     private void start1v1(Player player, Player target) {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         PlayerData targetData = PlayerDataManager.getPlayerData(target);
@@ -81,6 +83,7 @@ public class _1v1Listener implements Listener {
         targetData.setLastCombatPlayer(player);
         targetData.setInDuel(true);
     }
+
     private void autoRespawn(Player player) {
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             ((CraftPlayer) player).getHandle().playerConnection.a(new PacketPlayInClientCommand(PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN));
@@ -136,33 +139,29 @@ public class _1v1Listener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler()
     public void PlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        PlayerData playerData = PlayerDataManager.getPlayerData(player);
-        if (playerData == null) return;
-        if (playerData.warpType == WarpType._1v1) {
-            if (event.getAction().name().contains("RIGHT") || event.getAction().name().contains("LEFT")) {
-                if (player.getItemInHand().isSimilar(OFF_QUEUE_ITEM)) {
-                    // entrar na queue e puxar aleatório ou ficar esperando por um player
-                    player.setItemInHand(ON_QUEUE_ITEM);
-                    queue.add(player);
-                    if (queue.size() == 1) {
-                        player.sendMessage("§7Queue vazia, aguardando jogadores...");
-                    } else {
-                        queue.remove(player);
-                        Player random = queue.get(new Random().nextInt(queue.size()));
-                        queue.remove(random);
-                        random.sendMessage("§aSeu duelo aleatório é contra o player §e" + player.getName() + "§a.");
-                        player.sendMessage("§aSeu duelo aleatório é contra o player §e" + random.getName() + "§a.");
-                        start1v1(player, random);
-                    }
-                } else if (player.getItemInHand().isSimilar(ON_QUEUE_ITEM)) {
-                    queue.remove(player);
-                    player.setItemInHand(OFF_QUEUE_ITEM);
-                    player.sendMessage("§cVocê saiu da queue de 1v1.");
-                }
+        if (event.hasItem() && event.getItem().isSimilar(OFF_QUEUE_ITEM)) {
+            PlayerData playerData = PlayerDataManager.getPlayerData(player);
+            if (playerData == null) return;
+            // entrar na queue e puxar aleatório ou ficar esperando por um player
+            player.setItemInHand(ON_QUEUE_ITEM);
+            queue.add(player);
+            if (queue.size() == 1) {
+                player.sendMessage("§7Queue vazia, aguardando jogadores...");
+            } else {
+                queue.remove(player);
+                Player random = queue.get(new Random().nextInt(queue.size()));
+                queue.remove(random);
+                random.sendMessage("§aSeu duelo aleatório é contra o player §e" + player.getName() + "§a.");
+                player.sendMessage("§aSeu duelo aleatório é contra o player §e" + random.getName() + "§a.");
+                start1v1(player, random);
             }
+        } else if (player.getItemInHand().isSimilar(ON_QUEUE_ITEM)) {
+            queue.remove(player);
+            player.setItemInHand(OFF_QUEUE_ITEM);
+            player.sendMessage("§cVocê saiu da queue de 1v1.");
         }
     }
 

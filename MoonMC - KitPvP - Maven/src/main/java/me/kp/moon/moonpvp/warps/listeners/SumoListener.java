@@ -46,11 +46,13 @@ public class SumoListener implements Listener {
         player.teleport(firstDuelLoc);
         target.teleport(secondDuelLoc);
     }
+
     private void giveDuelItems(Player player) {
         player.closeInventory();
         Inventory inv = player.getInventory();
         inv.clear();
     }
+
     private void start1v1(Player player, Player target) {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         PlayerData targetData = PlayerDataManager.getPlayerData(target);
@@ -80,6 +82,7 @@ public class SumoListener implements Listener {
         targetData.setLastCombatPlayer(player);
         targetData.setInDuel(true);
     }
+
     private void autoRespawn(Player player) {
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             PlayerData playerData = PlayerDataManager.getPlayerData(player);
@@ -135,33 +138,29 @@ public class SumoListener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler()
     public void PlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        PlayerData playerData = PlayerDataManager.getPlayerData(player);
-        if (playerData == null) return;
-        if (playerData.warpType == WarpType.SUMO) {
-            if (event.getAction().name().contains("RIGHT") || event.getAction().name().contains("LEFT")) {
-                if (player.getItemInHand().isSimilar(OFF_QUEUE_ITEM)) {
-                    // entrar na queue e puxar aleatório ou ficar esperando por um player
-                    player.setItemInHand(ON_QUEUE_ITEM);
-                    queue.add(player);
-                    if (queue.size() == 1) {
-                        player.sendMessage("§7Queue vazia, aguardando jogadores...");
-                    } else {
-                        queue.remove(player);
-                        Player random = queue.get(new Random().nextInt(queue.size()));
-                        queue.remove(random);
-                        random.sendMessage("§aSeu duelo aleatório é contra o player §e" + player.getName() + "§a.");
-                        player.sendMessage("§aSeu duelo aleatório é contra o player §e" + random.getName() + "§a.");
-                        start1v1(player, random);
-                    }
-                } else if (player.getItemInHand().isSimilar(ON_QUEUE_ITEM)) {
-                    queue.remove(player);
-                    player.setItemInHand(OFF_QUEUE_ITEM);
-                    player.sendMessage("§cVocê saiu da queue de Sumô.");
-                }
+        if (event.hasItem() && event.getItem().isSimilar(OFF_QUEUE_ITEM)) {
+            PlayerData playerData = PlayerDataManager.getPlayerData(player);
+            if (playerData == null) return;
+            // entrar na queue e puxar aleatório ou ficar esperando por um player
+            player.setItemInHand(ON_QUEUE_ITEM);
+            queue.add(player);
+            if (queue.size() == 1) {
+                player.sendMessage("§7Queue vazia, aguardando jogadores...");
+            } else {
+                queue.remove(player);
+                Player random = queue.get(new Random().nextInt(queue.size()));
+                queue.remove(random);
+                random.sendMessage("§aSeu duelo aleatório é contra o player §e" + player.getName() + "§a.");
+                player.sendMessage("§aSeu duelo aleatório é contra o player §e" + random.getName() + "§a.");
+                start1v1(player, random);
             }
+        } else if (player.getItemInHand().isSimilar(ON_QUEUE_ITEM)) {
+            queue.remove(player);
+            player.setItemInHand(OFF_QUEUE_ITEM);
+            player.sendMessage("§cVocê saiu da queue de Sumô.");
         }
     }
 
@@ -181,7 +180,8 @@ public class SumoListener implements Listener {
                     PlayerUtils.deadKillPlayer(player, playerData, killer);
                     autoRespawn(player);
                     autoRespawn(killer);
-                } catch (Exception ignore) {}
+                } catch (Exception ignore) {
+                }
             }
         }
     }
