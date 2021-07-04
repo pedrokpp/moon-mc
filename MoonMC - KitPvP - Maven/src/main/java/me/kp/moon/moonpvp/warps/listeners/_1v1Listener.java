@@ -26,7 +26,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 public class _1v1Listener implements Listener {
 
@@ -35,7 +34,7 @@ public class _1v1Listener implements Listener {
     public static final ItemStack ON_QUEUE_ITEM = ItemUtils.editItemStack(new ItemStack(Material.INK_SACK, 1, (short) 10), "§9Buscando players no 1v1...", null);
 
     private static final World WORLD = Bukkit.getWorlds().get(0);
-    public static final List<UUID> queue = new ArrayList<>();
+    public static final List<Player> queue = new ArrayList<>();
 
     private static final Location firstDuelLoc = new Location(WORLD, 902.5, 75, -231.5, 0, 0);
     private static final Location secondDuelLoc = new Location(WORLD, 902.5, 75, -189.5, -180, 0);
@@ -57,8 +56,8 @@ public class _1v1Listener implements Listener {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         PlayerData targetData = PlayerDataManager.getPlayerData(target);
         if (playerData == null || targetData == null) return;
-        queue.remove(player.getUniqueId());
-        queue.remove(target.getUniqueId());
+        queue.remove(player);
+        queue.remove(target);
 
         Bukkit.getOnlinePlayers().forEach(online -> {
             player.hidePlayer(online);
@@ -144,19 +143,19 @@ public class _1v1Listener implements Listener {
                 if (player.getItemInHand().isSimilar(OFF_QUEUE_ITEM)) {
                     // entrar na queue e puxar aleatório ou ficar esperando por um player
                     player.setItemInHand(ON_QUEUE_ITEM);
-                    queue.add(player.getUniqueId());
+                    queue.add(player);
                     if (queue.size() == 1) {
                         player.sendMessage("§7Queue vazia, aguardando jogadores...");
                     } else {
-                        queue.remove(player.getUniqueId());
-                        Player random = Bukkit.getPlayer(queue.get(new Random().nextInt(queue.size())));
-                        queue.remove(random.getUniqueId());
+                        queue.remove(player);
+                        Player random = queue.get(new Random().nextInt(queue.size()));
+                        queue.remove(random);
                         random.sendMessage("§aSeu duelo aleatório é contra o player §e" + player.getName() + "§a.");
                         player.sendMessage("§aSeu duelo aleatório é contra o player §e" + random.getName() + "§a.");
                         start1v1(player, random);
                     }
                 } else if (player.getItemInHand().isSimilar(ON_QUEUE_ITEM)) {
-                    queue.remove(player.getUniqueId());
+                    queue.remove(player);
                     player.setItemInHand(OFF_QUEUE_ITEM);
                     player.sendMessage("§cVocê saiu da queue de 1v1.");
                 }
