@@ -59,6 +59,9 @@ public class _1v1Listener implements Listener {
         queue.remove(player);
         queue.remove(target);
 
+        player.setHealth(20.0);
+        target.setHealth(20.0);
+
         Bukkit.getOnlinePlayers().forEach(online -> {
             player.hidePlayer(online);
             target.hidePlayer(online);
