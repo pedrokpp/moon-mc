@@ -173,31 +173,13 @@ public class _1v1Listener implements Listener {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         Player killer = player.getKiller();
         if (killer == null) {
-            assert playerData != null;
-            playerData.setCacheKillStreak(0);
-            playerData.setLastCombatPlayer(null);
-            playerData.setCombat(false);
-            player.sendMessage("§cVocê morreu por causas desconhecidas, portanto suas estatísticas não foram alteradas.");
-            PlayerKill.autoRespawn(player);
             return;
         }
         PlayerData killerData = PlayerDataManager.getPlayerData(killer);
         if (killerData == null) {
-            assert playerData != null;
-            playerData.setCacheKillStreak(0);
-            playerData.setLastCombatPlayer(null);
-            playerData.setCombat(false);
-            player.sendMessage("§cVocê morreu por causas desconhecidas, portanto suas estatísticas não foram alteradas.");
-            PlayerKill.autoRespawn(player);
             return;
         }
         if (killer == player || playerData == null) {
-            player.sendMessage("§cVocê morreu por causas desconhecidas, portanto suas estatísticas não foram alteradas.");
-            assert playerData != null;
-            playerData.setCacheKillStreak(0);
-            playerData.setLastCombatPlayer(null);
-            playerData.setCombat(false);
-            PlayerKill.autoRespawn(player);
             return;
         }
         if ((playerData.warpType == WarpType._1v1 && killerData.warpType == WarpType._1v1)) {
