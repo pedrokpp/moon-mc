@@ -64,8 +64,8 @@ public class CombatLog implements Listener {
             PlayerUtils.addPlayersCombatLog(playerData, damagerData, 1000);
             PlayerUtils.addPlayersCombatLog(damagerData, playerData, 1000);
         } else {
-            PlayerUtils.addPlayersCombatLog(playerData, damagerData, 30);
-            PlayerUtils.addPlayersCombatLog(damagerData, playerData, 30);
+            PlayerUtils.addPlayersCombatLog(playerData, damagerData, 20);
+            PlayerUtils.addPlayersCombatLog(damagerData, playerData, 20);
         }
     }
 
