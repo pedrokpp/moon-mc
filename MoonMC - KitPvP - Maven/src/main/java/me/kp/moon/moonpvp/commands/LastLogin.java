@@ -30,7 +30,6 @@ public class LastLogin implements CommandExecutor {
             }
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                Player targetOff;
                 for (OfflinePlayer p : Bukkit.getOfflinePlayers()) {
                     if (p.getName().equalsIgnoreCase(args[0])) {
                         Date date = new Date(p.getLastPlayed());
@@ -39,7 +38,6 @@ public class LastLogin implements CommandExecutor {
                                 + "§a.");
                     }
                 }
-                player.sendMessage("§cNão foi possível encontrar o player §e" + args[0] + "§c.");
                 return true;
             }
             Date date = new Date(target.getLastPlayed());
