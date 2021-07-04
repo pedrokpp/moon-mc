@@ -1,0 +1,5 @@
+name: WorldEdit
+version: ${project.version}
+main: me.kp.moon.worldedit.Main
+api-version: 1.17
+authors: [ pedrokp ]

@@ -1,0 +1,10 @@
+name: MoonDiscord
+version: ${project.version}
+main: me.kp.moon.moondiscord.plugin.Main
+api-version: 1.8.8
+authors: [ pedrokp ]
+description: Integração entre Discord e Servidor
+website: https://github.com/pedrokpp
+commands:
+  sync:
+    description: Sincronize sua conta do Minecraft ao Discord

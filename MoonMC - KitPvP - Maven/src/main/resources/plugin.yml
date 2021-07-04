@@ -1,0 +1,157 @@
+name: MoonPvP
+version: ${project.version}
+main: me.kp.moon.moonpvp.Main
+authors: [ pedrokp ]
+api-version: 1.8.8
+website: https://github.com/pedrokpp
+commands:
+  sc:
+    description: Staff Chat
+    aliases:
+      - s
+  admin:
+    description: Entre no modo adminastro
+  superadmin:
+    description: Entre no modo super adminastro
+    aliases:
+      - sa
+  vanish:
+    description: Entre no modo vanish
+    aliases:
+      - v
+  sudo:
+    description: Force players a falar ou digitar comandos
+  build:
+    description: Ative/desative o modo build
+    aliases:
+      - b
+  invsee:
+    description: Veja o inventário dozotor!!
+    aliases:
+      - inv
+  lastlogin:
+    description: Cheque o último login de um player
+    aliases:
+      - ll
+  sortearplayer:
+    description: Sorteie um player aleatório
+  sorteio:
+    description: Sorteie moedas para um player aleatório
+  discord:
+    description: Junte-se a nossa comunidade!
+  fly:
+    description: Ative/desative o seu modo fly ou de alguém
+  money:
+    description: Cheque a sua quantidade ou de outro player de dinheiro
+    aliases:
+      - bal
+  addmoney:
+    description: Adicione dinheiro a um player
+  removemoney:
+    description: Remova dinheiro de um player
+  group:
+    description: Grupos!!
+    aliases:
+      - setgroup
+  hidestaff:
+    description: Esconda staffers no /admin
+    aliases:
+      - hs
+  kit:
+    description: Escolha um kit ou abra o menu de kits
+    aliases:
+      - kits
+  tell:
+    description: Envie mensagens privadas para outros players
+  r:
+    description: Responda mensagens privadas
+  tag:
+    description: Altere sua tag
+  tags:
+    description: Veja suas tags
+  block:
+    description: Bloqueie players
+  unblock:
+    description: Desbloqueie players bloqueados
+  report:
+    description: Reporte players aos staffers
+  rptp:
+    description: Staffers tp rápido report
+  tp:
+    description: Teleporte-se para outras pessoas
+    aliases:
+      - teleport
+      - tpto
+  tphere:
+    description: Telepore outras pessoas para você
+    aliases:
+      - tph
+      - tptome
+      - teleporthere
+  spawn:
+    description: Teleporte-se para o spawn
+    aliases:
+      - lobby
+  gamemode:
+    description: Muda seu modo de jogo
+    aliases:
+      - gm
+  teste:
+    description: dev
+  warp:
+    description: Warps
+    aliases:
+      - warps
+  setmoney:
+    description: Seta money
+  ab:
+    description: Envie mensagens pela ActionBar para players
+    aliases:
+      - actionbar
+  ac:
+    description: Mande avisos
+    aliases:
+      - avisoc
+  at:
+    description: Mande avisos
+    aliases:
+      - avisot
+  aplicar:
+    description: Instruções para se aplicar para staff
+    aliases:
+      - trial
+      - helper
+  chat:
+    description: Altere o chat
+  check:
+    description: Cheque informações administrativas de um player
+  crash:
+    description: De vip para um player
+  head:
+    description: Pegue a cabeça de um player
+  online:
+    description: Quantos players online
+  rank:
+    description: Veja informações sobre o seu rank
+  status:
+    description: Veja seus status
+  evento:
+    description: Eventos!!@#!@
+  info:
+    description: Informações
+  ss:
+    description: Screenshare
+    aliases:
+      - screenshare
+  ping:
+    description: Checa o ping de outras pessoas
+  cc:
+    description: Limpe o seu chat
+  givekit:
+    description: Dê kits!
+  removekit:
+    description: Remova kits!
+  grant:
+    description: Permissoes!!
+  ungrant:
+    description: Nao permissoes!!

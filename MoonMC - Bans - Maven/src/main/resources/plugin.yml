@@ -1,0 +1,58 @@
+name: MoonBans
+version: 1.0.0
+main: me.kp.moon.moonbans.Main
+authors:
+  - pedrokp
+load: POSTWORLD
+softdepend:
+  - packetevents
+  - ViaVersion
+  - ProtocolSupport
+  - ProtocolLib
+
+commands:
+  ipban:
+    description: Dê ban no ip de players
+    aliases:
+      - ban
+
+  checkban:
+    description: Cheque banimentos aplicados
+    aliases:
+      - cb
+
+  unban:
+    description: Revogue um banimento de um player ou ip
+
+  tempipban:
+    description: Aplique banimentos temporários a um player ou ip
+    aliases:
+      - tempban
+
+  mute:
+    description: Aplique mutes
+
+  unmute:
+    description: Revogue mutes
+
+  tempmute:
+    description: Mute temporáriamente
+
+  checkmute:
+    description: Cheque mutes aplicados
+    aliases:
+      - cm
+
+  alts:
+    description: Cheque contas alternativas de um player
+
+  checkip:
+    description: Cheque um IP
+    aliases:
+      - dupeip
+
+  kick:
+    description: Kicke um player
+
+  testt:
+    description: Dev
