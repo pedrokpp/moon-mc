@@ -4,6 +4,7 @@ import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Strings;
+import me.kp.moon.moonpvp.warps.WarpType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.help.HelpTopic;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
@@ -115,10 +117,18 @@ public class World implements Listener {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         if (playerData == null) return;
         if (playerData.evento) event.setCancelled(false);
-        else event.setCancelled(event.getItemDrop().getItemStack().getType() != Material.MUSHROOM_SOUP && event.getItemDrop().getItemStack().getType() != Material.BOWL &&
+        else {
+            if (playerData.warpType == WarpType.LAVA) {
+                if (event.getItemDrop().getItemStack().getType() == Material.BOWL) {
+                    event.getItemDrop().remove();
+                    return;
+                }
+            }
+            event.setCancelled(event.getItemDrop().getItemStack().getType() != Material.MUSHROOM_SOUP && event.getItemDrop().getItemStack().getType() != Material.BOWL &&
                     event.getItemDrop().getItemStack().getType() != Material.BROWN_MUSHROOM && event.getItemDrop().getItemStack().getType() != Material.RED_MUSHROOM &&
-                event.getItemDrop().getItemStack().getType() != Material.IRON_HELMET && event.getItemDrop().getItemStack().getType() != Material.IRON_CHESTPLATE &&
-                event.getItemDrop().getItemStack().getType() != Material.IRON_LEGGINGS && event.getItemDrop().getItemStack().getType() != Material.IRON_BOOTS);
+                    event.getItemDrop().getItemStack().getType() != Material.IRON_HELMET && event.getItemDrop().getItemStack().getType() != Material.IRON_CHESTPLATE &&
+                    event.getItemDrop().getItemStack().getType() != Material.IRON_LEGGINGS && event.getItemDrop().getItemStack().getType() != Material.IRON_BOOTS);
+        }
     }
 
     @EventHandler
