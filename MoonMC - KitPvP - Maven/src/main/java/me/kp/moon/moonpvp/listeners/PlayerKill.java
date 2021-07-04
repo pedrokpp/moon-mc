@@ -6,6 +6,7 @@ import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.kit.KitType;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
 import me.kp.moon.moonpvp.warps.WarpType;
+import me.kp.moon.moonpvp.warps.WarpUtils;
 import net.minecraft.server.v1_8_R3.PacketPlayInClientCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -17,11 +18,17 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerKill implements Listener {
 
-    public static void autoRespawn(Player player) {
+    public static void autoRespawn(PlayerData playerData) {
+        Player player = playerData.getPlayer();
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             ((CraftPlayer) player).getHandle().playerConnection.a(new PacketPlayInClientCommand(PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN));
-            PlayerUtils.sendPlayerToSpawn(player);
-        }, 2L);
+            if (playerData.warpType != WarpType.ARENA) {
+                WarpUtils.giveWarpItems(playerData);
+                WarpUtils.teleportPlayerToWarp(player, playerData.warpType);
+            } else {
+                PlayerUtils.sendPlayerToSpawn(player);
+            }
+        }, 1L);
     }
 
     @EventHandler(priority = EventPriority.LOW)
@@ -36,7 +43,7 @@ public class PlayerKill implements Listener {
             playerData.setLastCombatPlayer(null);
             playerData.setCombat(false);
             player.sendMessage("§cVocê morreu por causas desconhecidas, portanto suas estatísticas não foram alteradas.");
-            autoRespawn(player);
+            autoRespawn(playerData);
             return;
         }
         PlayerData killerData = PlayerDataManager.getPlayerData(killer);
@@ -46,7 +53,7 @@ public class PlayerKill implements Listener {
             playerData.setLastCombatPlayer(null);
             playerData.setCombat(false);
             player.sendMessage("§cVocê morreu por causas desconhecidas, portanto suas estatísticas não foram alteradas.");
-            autoRespawn(player);
+            autoRespawn(playerData);
             return;
         }
         if (killer == player || playerData == null) {
@@ -55,7 +62,7 @@ public class PlayerKill implements Listener {
             playerData.setCacheKillStreak(0);
             playerData.setLastCombatPlayer(null);
             playerData.setCombat(false);
-            autoRespawn(player);
+            autoRespawn(playerData);
             return;
         }
         if ((playerData.warpType == WarpType._1v1 && killerData.warpType == WarpType._1v1) ||
@@ -64,7 +71,7 @@ public class PlayerKill implements Listener {
         if (killerData.kitType == KitType.STOMPER) {
             PlayerUtils.killerKillPlayer(killer, killerData, playerData);
             PlayerUtils.deadKillPlayer(player, playerData, killer);
-            autoRespawn(player);
+            autoRespawn(playerData);
             return;
         }
         if (playerData.evento) {
@@ -76,7 +83,7 @@ public class PlayerKill implements Listener {
                 killer.sendMessage("§aVocê matou §7" + player.getName() + "§a.");
                 killer.sendMessage("§7§o(Sem recompensas por estar em um evento)");
             }
-            autoRespawn(player);
+            autoRespawn(playerData);
             return;
         }
         if ((playerData.warpType == WarpType.KB && killerData.warpType == WarpType.KB) || (playerData.warpType == WarpType.FISHERMAN && killerData.warpType == WarpType.FISHERMAN)) {
@@ -85,12 +92,12 @@ public class PlayerKill implements Listener {
             playerData.setCombat(false);
             killer.sendMessage("§aVocê matou §7" + player.getName() + "§a.");
             killer.sendMessage("§7§o(Sem recompensas por estar em uma warp de diversão)");
-            autoRespawn(player);
+            autoRespawn(playerData);
             return;
         }
         PlayerUtils.killerKillPlayer(killer, killerData, playerData);
         PlayerUtils.deadKillPlayer(player, playerData, killer);
-        autoRespawn(player);
+        autoRespawn(playerData);
     }
 
 }
