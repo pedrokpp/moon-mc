@@ -129,9 +129,13 @@ public class World implements Listener {
                     return;
                 }
             }
-            if (playerData.warpType == null) {
+            if (playerData.warpType == null || playerData.warpType == WarpType.SUMO) {
                 event.setCancelled(true);
             } else {
+                if (playerData.warpType == WarpType._1v1) {
+                    if (itemStack.getType() == Material.INK_SACK) event.setCancelled(true);
+                    return;
+                }
                 event.setCancelled(itemStack.getType() != Material.MUSHROOM_SOUP && itemStack.getType() != Material.BOWL &&
                         itemStack.getType() != Material.BROWN_MUSHROOM && itemStack.getType() != Material.RED_MUSHROOM &&
                         itemStack.getType() != Material.IRON_HELMET && itemStack.getType() != Material.IRON_CHESTPLATE &&
