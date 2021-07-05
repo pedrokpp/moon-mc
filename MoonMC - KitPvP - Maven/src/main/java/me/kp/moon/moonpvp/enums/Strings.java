@@ -9,7 +9,20 @@ import java.util.Random;
 
 public class Strings {
 
-    private static final List<String> motds = Arrays.asList("§fConfira nossa §6SEGUNDA SEASON§f!", "§fVeja as atualizações no §9Discord§f!");
+    private static final List<String> motds = Arrays.asList("§fConfira nossa §6SEGUNDA SEASON§f!", "§fVeja as atualizações no §9Discord§f!", "§fCheque o novo kit §6Gladiator§f!", "§fNovo sistema de §6ranks §fe §6medalhas§f!");
+
+    private static String getMotdMessage(String motd) {
+        float y = (float) motd.length();
+        for (char c : motd.toCharArray()) {
+            if (c == '§') y -= 2.5;
+        }
+        int ac = (int) ((60 - y) / 2);
+        StringBuilder space = new StringBuilder();
+        for (int i = 0; i < ac; i++) {
+            space.append(" ");
+        }
+        return space + motd;
+    }
 
     public static String getDiscord() { return "https://discord.gg/A8wwkTuesh"; }
 
@@ -33,9 +46,9 @@ public class Strings {
 
     public static String getMotd() {
         if (Bukkit.getServer().hasWhitelist()) {
-            return "                     " + getName() + "§f » §7[1.7 - 1.8]\n          §cO servidor encontra-se em manutenção.";
+            return getMotdMessage(getName() + "§f » §7[1.7 - 1.8]") + "\n" + getMotdMessage("§cO servidor encontra-se em manutenção.");
         }
-        return "                      " + getName() + "§f » §7[1.7 - 1.8]\n               " + motds.get(new Random().nextInt(motds.size()));
+        return getMotdMessage(getName() + "§f » §7[1.7 - 1.8]") + "\n" + getMotdMessage(motds.get(new Random().nextInt(motds.size())));
     }
 
 }
