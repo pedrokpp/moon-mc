@@ -46,7 +46,7 @@ public class Medal implements CommandExecutor {
             ArrayList<BaseComponent> medals = new ArrayList<>();
             medals.add(new TextComponent("§aSuas medalhas são: "));
             Medals[] values;
-            for (int length = (values = Medals.values()).length, i = 1; i < length; ++i) {
+            for (int length = (values = Medals.values()).length, i = 0; i < length; ++i) {
                 Medals medal = values[i];
                 if (player.hasPermission("medal." + medal.getName().toLowerCase())) {
                     TextComponent medalComponent = new TextComponent(medal.getMedal());

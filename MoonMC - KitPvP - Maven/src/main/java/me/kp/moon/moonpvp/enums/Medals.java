@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 @Getter
 public enum Medals {
 
-    DUMMY("   ", "", ""),
     NENHUM("§7Nenhuma", "§7Nenhuma", "§7Sem medalhas."),
     DEV("§eDev", "§e☕", "§7Para quem participou do desenvolvimento do servidor."),
     EX_STAFF("§6Ex-Staff", "§6⚜", "§7Para quem já foi staff do servidor."),
