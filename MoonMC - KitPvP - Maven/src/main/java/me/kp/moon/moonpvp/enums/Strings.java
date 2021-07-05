@@ -3,8 +3,13 @@ package me.kp.moon.moonpvp.enums;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Strings {
+
+    private static final List<String> motds = Arrays.asList("§fConfira nossa §6SEGUNDA SEASON§f!", "§fVeja as atualizações no §9Discord§f!");
 
     public static String getDiscord() { return "https://discord.gg/A8wwkTuesh"; }
 
@@ -30,7 +35,7 @@ public class Strings {
         if (Bukkit.getServer().hasWhitelist()) {
             return "                     " + getName() + "§f » §7[1.7 - 1.8]\n          §cO servidor encontra-se em manutenção.";
         }
-        return "                      " + getName() + "§f » §7[1.7 - 1.8]\n               §fConfira nossa §6SEGUNDA SEASON§f!";
+        return "                      " + getName() + "§f » §7[1.7 - 1.8]\n               " + motds.get(new Random().nextInt(motds.size()));
     }
 
 }
