@@ -1,6 +1,7 @@
 package me.kp.moon.worldedit.data;
 
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -10,6 +11,9 @@ public class PlayerData {
 
     private Player player;
     private UUID playerUUID;
+
+    public Location pos1;
+    public Location pos2;
 
     public PlayerData(Player player) {
         this.player = player;
