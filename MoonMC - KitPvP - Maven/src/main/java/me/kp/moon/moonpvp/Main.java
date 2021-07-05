@@ -158,6 +158,8 @@ public final class Main extends JavaPlugin {
         getCommand("r").setExecutor(new R());
         getCommand("tag").setExecutor(new Tag());
         getCommand("tags").setExecutor(new Tag());
+        getCommand("medal").setExecutor(new Medal());
+        getCommand("medals").setExecutor(new Medal());
         getCommand("block").setExecutor(new BlockUnblock());
         getCommand("unblock").setExecutor(new BlockUnblock());
         getCommand("report").setExecutor(new Report());

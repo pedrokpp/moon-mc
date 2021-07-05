@@ -155,3 +155,11 @@ commands:
     description: Permissoes!!
   ungrant:
     description: Nao permissoes!!
+  medal:
+    description: medalhas!!
+    aliases:
+      - medalha
+  medals:
+    description: medalhas!!
+    aliases:
+      - medalhas

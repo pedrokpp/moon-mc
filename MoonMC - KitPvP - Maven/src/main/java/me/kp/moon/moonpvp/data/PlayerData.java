@@ -1,6 +1,7 @@
 package me.kp.moon.moonpvp.data;
 
 import lombok.Setter;
+import me.kp.moon.moonpvp.enums.Medals;
 import me.kp.moon.moonpvp.enums.PlayerRank;
 import me.kp.moon.moonpvp.enums.PlayerTag;
 import me.kp.moon.moonpvp.kit.KitType;
@@ -82,6 +83,8 @@ public class PlayerData {
 
     public PlayerTag playerTag = null;
     public String lastTag = null;
+
+    public Medals medal = Medals.NENHUM;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;

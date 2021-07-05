@@ -2,6 +2,7 @@ package me.kp.moon.moonpvp.listeners;
 
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
+import me.kp.moon.moonpvp.enums.Medals;
 import me.kp.moon.moonpvp.enums.PlayerRank;
 import me.kp.moon.moonpvp.enums.PlayerTag;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
@@ -66,12 +67,13 @@ public class Chat implements Listener {
 
         event.setCancelled(true);
         String tempMessage = playerData.playerTag != PlayerTag.MEMBRO ?
-                "%(RANK)% %[CLAN]% §r" + player.getDisplayName() + " §8»§f " + message : // não é membro
-                "%(RANK)% %[CLAN]% §r" + player.getDisplayName() + " §8»§7 " + message; // é membro
+                "%(RANK)% %[CLAN]% §r" + player.getDisplayName() + " %(MEDAL)% §8»§f " + message : // não é membro
+                "%(RANK)% %[CLAN]% §r" + player.getDisplayName() + " %(MEDAL)% §8»§7 " + message; // é membro
         String clanrepl = playerData.cacheLastClan == null ? "" : playerData.cacheLastClan;
         String clanMessage = clanrepl.equals("") ? tempMessage.replace("%[CLAN]% ", clanrepl) : tempMessage.replace("%[CLAN]%", clanrepl);
         String rankMessage = clanMessage.replace("%(RANK)%", "§7(" + PlayerRank.getRank(playerData).getColoredSymbol() + "§7)");
-        TextComponent textComponent = new TextComponent(rankMessage);
+        String medalMessage = playerData.medal == Medals.NENHUM ? rankMessage.replace("%(MEDAL)% ", "") : rankMessage.replace("%(MEDAL)%", playerData.medal.getMedal());
+        TextComponent textComponent = new TextComponent(medalMessage);
         Bukkit.getConsoleSender().sendMessage(playerData.screenshare ? "[SS] " + textComponent.toLegacyText() : "[CHAT] " + textComponent.toLegacyText());
         if (!player.hasPermission("command.staffchat")) PlayerUtils.addChatCooldown(playerData);
         event.getRecipients().forEach(players -> {
