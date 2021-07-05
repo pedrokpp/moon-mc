@@ -10,6 +10,8 @@ import java.util.List;
 
 public class ItemUtils {
 
+    public static ItemStack cocoa = new ItemStack(Material.INK_SACK, 1, (short) 3);
+
     public static ItemStack getCustomItemStack(Material material, String name, String lore) {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();

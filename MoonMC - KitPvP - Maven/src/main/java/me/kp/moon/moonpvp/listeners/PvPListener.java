@@ -136,9 +136,15 @@ public class PvPListener implements Listener {
                     }
                     case "§9Recraft!": {
                         final Inventory inv = Bukkit.createInventory(null, 9, "");
-                        inv.setItem(3, new ItemStack(Material.BOWL, 64));
-                        inv.setItem(4, new ItemStack(Material.BROWN_MUSHROOM, 64));
-                        inv.setItem(5, new ItemStack(Material.RED_MUSHROOM, 64));
+                        if (playerData.soupType.equalsIgnoreCase("mush")) {
+                            inv.setItem(3, new ItemStack(Material.BOWL, 64));
+                            inv.setItem(4, new ItemStack(Material.BROWN_MUSHROOM, 64));
+                            inv.setItem(5, new ItemStack(Material.RED_MUSHROOM, 64));
+                        } else {
+                            inv.setItem(3, new ItemStack(Material.BOWL, 64));
+                            inv.setItem(4, new ItemStack(Material.INK_SACK, 64, (short) 3));
+                            inv.setItem(5, new ItemStack(Material.INK_SACK, 64, (short) 3));
+                        }
                         player.openInventory(inv);
                         break;
                     }

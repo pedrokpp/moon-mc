@@ -28,8 +28,8 @@ public class WarpUtils {
         playerData.setWarpType(null);
         playerData.setInDuel(false);
         playerData.setLastDuelPlayer(null);
-        _1v1Listener.queue.remove(player.getUniqueId());
-        SumoListener.queue.remove(player.getUniqueId());
+        _1v1Listener.queue.remove(player);
+        SumoListener.queue.remove(player);
 //        playerData.setLastKitTarget(null);
     }
 
@@ -48,8 +48,12 @@ public class WarpUtils {
         }
         if (playerData.warpType == WarpType.LAVA) {
             inv.setItem(13, new ItemStack(Material.BOWL, 64));
-            inv.setItem(14, new ItemStack(Material.RED_MUSHROOM, 64));
-            inv.setItem(15, new ItemStack(Material.BROWN_MUSHROOM, 64));
+            if (playerData.soupType.equalsIgnoreCase("mush")) {
+                inv.setItem(14, new ItemStack(Material.RED_MUSHROOM, 64));
+                inv.setItem(15, new ItemStack(Material.BROWN_MUSHROOM, 64));
+            } else {
+                inv.setItem(14, new ItemStack(Material.INK_SACK, 64, (short) 3));
+            }
             for (int i = 0; i < 36; ++i) {
                 inv.addItem(new ItemStack(Material.MUSHROOM_SOUP));
             }
@@ -70,8 +74,12 @@ public class WarpUtils {
             sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
             inv.setItem(0, sword);
             inv.setItem(13, new ItemStack(Material.BOWL, 64));
-            inv.setItem(14, new ItemStack(Material.RED_MUSHROOM, 64));
-            inv.setItem(15, new ItemStack(Material.BROWN_MUSHROOM, 64));
+            if (playerData.soupType.equalsIgnoreCase("mush")) {
+                inv.setItem(14, new ItemStack(Material.RED_MUSHROOM, 64));
+                inv.setItem(15, new ItemStack(Material.BROWN_MUSHROOM, 64));
+            } else {
+                inv.setItem(14, new ItemStack(Material.INK_SACK, 64, (short) 3));
+            }
             for (int i = 0; i < 36; ++i) {
                 inv.addItem(new ItemStack(Material.MUSHROOM_SOUP));
             }

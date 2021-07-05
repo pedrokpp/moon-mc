@@ -4,6 +4,7 @@ import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Strings;
+import me.kp.moon.moonpvp.utils.ItemUtils;
 import me.kp.moon.moonpvp.warps.WarpType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,10 +21,12 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.help.HelpTopic;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class World implements Listener {
 
@@ -91,6 +94,7 @@ public class World implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         if (playerData == null) return;
+        ItemStack itemStack = event.getItem().getItemStack();
         if (playerData.admin || playerData.superadmin || playerData.vanish) {
             event.setCancelled(true);
             return;
@@ -100,8 +104,9 @@ public class World implements Listener {
             return;
         }
         if (playerData.kitType != null || playerData.warpType != null) {
-            event.setCancelled(event.getItem().getItemStack().getType() != Material.MUSHROOM_SOUP && event.getItem().getItemStack().getType() != Material.BOWL &&
-                    event.getItem().getItemStack().getType() != Material.BROWN_MUSHROOM && event.getItem().getItemStack().getType() != Material.RED_MUSHROOM);
+            event.setCancelled(itemStack.getType() != Material.MUSHROOM_SOUP && itemStack.getType() != Material.BOWL &&
+                    itemStack.getType() != Material.BROWN_MUSHROOM && itemStack.getType() != Material.RED_MUSHROOM &&
+                    (itemStack.getType() != Material.INK_SACK && itemStack.getDurability() != 3));
         }
     }
 
@@ -115,18 +120,24 @@ public class World implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         if (playerData == null) return;
+        ItemStack itemStack = event.getItemDrop().getItemStack();
         if (playerData.evento) event.setCancelled(false);
         else {
             if (playerData.warpType == WarpType.LAVA) {
-                if (event.getItemDrop().getItemStack().getType() == Material.BOWL) {
+                if (itemStack.getType() == Material.BOWL) {
                     event.getItemDrop().remove();
                     return;
                 }
             }
-            event.setCancelled(event.getItemDrop().getItemStack().getType() != Material.MUSHROOM_SOUP && event.getItemDrop().getItemStack().getType() != Material.BOWL &&
-                    event.getItemDrop().getItemStack().getType() != Material.BROWN_MUSHROOM && event.getItemDrop().getItemStack().getType() != Material.RED_MUSHROOM &&
-                    event.getItemDrop().getItemStack().getType() != Material.IRON_HELMET && event.getItemDrop().getItemStack().getType() != Material.IRON_CHESTPLATE &&
-                    event.getItemDrop().getItemStack().getType() != Material.IRON_LEGGINGS && event.getItemDrop().getItemStack().getType() != Material.IRON_BOOTS);
+            if (playerData.warpType == null) {
+                event.setCancelled(true);
+            } else {
+                event.setCancelled(itemStack.getType() != Material.MUSHROOM_SOUP && itemStack.getType() != Material.BOWL &&
+                        itemStack.getType() != Material.BROWN_MUSHROOM && itemStack.getType() != Material.RED_MUSHROOM &&
+                        itemStack.getType() != Material.IRON_HELMET && itemStack.getType() != Material.IRON_CHESTPLATE &&
+                        itemStack.getType() != Material.IRON_LEGGINGS && itemStack.getType() != Material.IRON_BOOTS &&
+                        (itemStack.getType() != Material.INK_SACK && itemStack.getDurability() != 3));
+            }
         }
     }
 

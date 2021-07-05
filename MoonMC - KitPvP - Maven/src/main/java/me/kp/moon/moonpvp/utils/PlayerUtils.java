@@ -8,6 +8,7 @@ import me.kp.moon.moonpvp.enums.PlayerRank;
 import me.kp.moon.moonpvp.enums.PlayerTag;
 import me.kp.moon.moonpvp.gui.SeusKitsGUI;
 import me.kp.moon.moonpvp.gui.ShopGUI;
+import me.kp.moon.moonpvp.gui.SoupTypeGUI;
 import me.kp.moon.moonpvp.gui.WarpsGUI;
 import me.kp.moon.moonpvp.kit.KitUtils;
 import me.kp.moon.moonpvp.warps.WarpType;
@@ -35,9 +36,7 @@ public class PlayerUtils {
         killerData.setCacheKills(killerData.cacheKills + 1);
         killerData.setCacheKillStreak(killerData.cacheKillStreak + 1);
         // anunciar killstreak
-        if (killerData.cacheKillStreak % 5 == 0 && killerData.cacheKillStreak >= 10) Bukkit.getOnlinePlayers().forEach(p -> {
-            p.sendMessage("§6" + killer.getName() + " §eatingiu um killstreak de §6" + killerData.cacheKillStreak + "§e!");
-        });
+        if (killerData.cacheKillStreak % 5 == 0 && killerData.cacheKillStreak >= 10) Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("§6" + killer.getName() + " §eatingiu um killstreak de §6" + killerData.cacheKillStreak + "§e!"));
     }
 
     public static void deadKillPlayer(Player player, PlayerData playerData, Player killer) {
@@ -48,10 +47,8 @@ public class PlayerUtils {
         playerData.setCacheDeaths(playerData.cacheDeaths + 1);
         PlayerUtils.checkRank(player, playerData);
         // anunciar perda de killstreak
-        if (playerData.cacheKillStreak % 5 == 0 && playerData.cacheKillStreak >= 10) Bukkit.getOnlinePlayers().forEach(p -> {
-            p.sendMessage("§6" + player.getName() + " §eperdeu seu killstreak de §6" + playerData.cacheKillStreak + " §epara §6" +
-                    killer.getName() + "§e!");
-        });
+        if (playerData.cacheKillStreak % 5 == 0 && playerData.cacheKillStreak >= 10) Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("§6" + player.getName() + " §eperdeu seu killstreak de §6" + playerData.cacheKillStreak + " §epara §6" +
+                killer.getName() + "§e!"));
         playerData.setCacheKillStreak(0);
         playerData.setLastCombatPlayer(null);
         playerData.setCombat(false);
@@ -81,16 +78,15 @@ public class PlayerUtils {
     public static void giveInitialItems(Player player) {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.getInventory().setItem(1, SeusKitsGUI.ICON);
-        player.getInventory().setItem(3, ShopGUI.ICON);
-        player.getInventory().setItem(5, WarpsGUI.ICON);
-        player.getInventory().setItem(7, ItemUtils.editItemStack(ItemUtils.getPlayerSkull(player.getName()), "§aSeu perfil", null));
+        player.getInventory().setItem(0, SeusKitsGUI.ICON);
+        player.getInventory().setItem(2, ShopGUI.ICON);
+        player.getInventory().setItem(4, SoupTypeGUI.ICON);
+        player.getInventory().setItem(6, WarpsGUI.ICON);
+        player.getInventory().setItem(8, ItemUtils.editItemStack(ItemUtils.getPlayerSkull(player.getName()), "§aSeu perfil", null));
     }
 
     public static void sendMessageToStaff(String message) {
-        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("command.staffchat")).forEach(staff -> {
-            staff.sendMessage(message.replace("&", "§"));
-        });
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("command.staffchat")).forEach(staff -> staff.sendMessage(message.replace("&", "§")));
     }
 
     public static int getPlayerPing(Player player) {
