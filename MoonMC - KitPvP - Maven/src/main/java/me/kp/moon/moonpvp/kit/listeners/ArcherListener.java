@@ -31,6 +31,7 @@ public class ArcherListener implements Listener {
             Player player = (Player) event.getEntity();
             Arrow arrow = (Arrow) event.getDamager();
             String damagerName = arrow.getCustomName();
+            if (damagerName == null) return;
             Player damager = Bukkit.getPlayer(damagerName);
             if (damager == null) return;
             PlayerData damagerData = PlayerDataManager.getPlayerData(damager);
@@ -45,22 +46,21 @@ public class ArcherListener implements Listener {
                 damager.sendMessage("§aVocê acertou uma flecha e causou §e" + effectType.getName().toUpperCase() + "§a.");
                 player.sendMessage("§cVocê recebeu §e" + effectType.getName().toUpperCase() + "§c por uma flecha especial de um archer.");
             }
-
-            if (event.getDamage() > player.getHealth()) {
-                if (damager.getInventory().contains(Material.ARROW))
-                    damager.getInventory().addItem(new ItemStack(Material.ARROW, 1));
-                else {
-                    for (ItemStack item : damager.getInventory()) {
-                        if (item == null) continue;
-                        if (item.getType() == Material.MUSHROOM_SOUP) {
-                            item.setType(Material.ARROW);
-                            damager.sendMessage("§aVocê recebeu uma flecha por matar alguém.");
-                            return;
-                        }
+            if (damager.getInventory().contains(Material.ARROW))
+                damager.getInventory().addItem(new ItemStack(Material.ARROW, 2));
+            else {
+                for (ItemStack item : damager.getInventory()) {
+                    if (item == null) continue;
+                    if (item.getType() == Material.MUSHROOM_SOUP) {
+                        item.setType(Material.ARROW);
+                        damager.sendMessage("§aVocê recebeu uma flecha por matar alguém.");
+                        damager.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+                        return;
                     }
                 }
-                damager.sendMessage("§aVocê recebeu uma flecha por matar alguém.");
             }
+            damager.sendMessage("§aVocê recebeu uma flecha por acertar alguém.");
+
         }
     }
 

@@ -29,7 +29,7 @@ public class KitUtils {
             playerData.getPlayer().getInventory().getItem(0).addEnchantment(Enchantment.DAMAGE_ALL, 1);
         }
         if (playerData.kitType == KitType.ARCHER) {
-            playerData.getPlayer().getInventory().setItem(2, new ItemStack(Material.ARROW, 32));
+            playerData.getPlayer().getInventory().setItem(2, new ItemStack(Material.ARROW, 16));
             playerData.getPlayer().getInventory().setItem(1, new ItemStack(Material.BOW, 1));
         }
         if (playerData.kitType.getItem() != null) {
