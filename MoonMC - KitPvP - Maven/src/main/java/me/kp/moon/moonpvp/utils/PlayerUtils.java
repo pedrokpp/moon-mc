@@ -169,7 +169,7 @@ public class PlayerUtils {
     }
 
     public static void checkRank(Player player, PlayerData playerData) {
-        if (playerData.cacheLastRank == PlayerRank.IMMORTAL) return;
+        if (playerData.cacheLastRank == PlayerRank.INFINITY) return;
         if (playerData.cacheLastRank.next().getXp() <= playerData.cacheXP) {
             SysUtils.sendTitle(player, "§aParabéns", "§eVocê alcançou o rank " + playerData.cacheLastRank.next().getColoredName());
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 1f);

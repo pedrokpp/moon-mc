@@ -30,7 +30,7 @@ public class Rank implements CommandExecutor {
                 }
             }
             player.sendMessage("§7Seu rank atual é: " + PlayerRank.getRank(playerData).getColoredName() + "§7.");
-            if (PlayerRank.getRank(playerData) != PlayerRank.IMMORTAL) {
+            if (PlayerRank.getRank(playerData) != PlayerRank.INFINITY) {
                 player.sendMessage("§7O próximo rank é: " + PlayerRank.getRank(playerData).next().getColoredName() + "§7.");
                 int pontos_necessarios = PlayerRank.getRank(playerData).next().getXp() - playerData.cacheXP;
                 player.sendMessage("§7Você possui §a" + playerData.cacheXP + " XP §7e faltam §a" + pontos_necessarios + " XP §7para o próximo §6rank§7.");

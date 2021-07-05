@@ -6,17 +6,21 @@ import org.bukkit.ChatColor;
 
 @Getter
 public enum PlayerRank {
-    IMMORTAL("Immortal", '✪', ChatColor.DARK_RED, 10000),
-    MASTER("Master", '❂', ChatColor.AQUA, 8700),
-    ELITE("Elite", '✵', ChatColor.DARK_BLUE, 7500),
-    EMERALD("Emerald", '✹', ChatColor.DARK_GREEN, 6200),
-    GOLD1("Gold I", '✸', ChatColor.GOLD, 5000),
-    GOLD2("Gold II", '✸', ChatColor.YELLOW, 4200),
-    SILVER1("Silver I", '✶', ChatColor.WHITE, 3200),
-    SILVER2("Silver II", '✶', ChatColor.DARK_GRAY, 2450),
-    SILVER3("Silver III", '✶', ChatColor.GRAY, 1750),
-    RECRUIT("Recruit", '=', ChatColor.WHITE, 1000),
-    UNRANKED("Unranked", '-', ChatColor.WHITE, 0);
+
+    INFINITY("Infinity", '۞', ChatColor.BLACK, 60000),
+    ANDROMEDA("Andromeda", '✯', ChatColor.LIGHT_PURPLE, 45000),
+    NEBULOUS("Nebulous", '✧', ChatColor.DARK_RED, 20000),
+    ECLIPSE("Eclipse", '✪', ChatColor.RED, 10000),
+    SUN("Sun", '❂', ChatColor.GOLD, 8700),
+    MERCURY("Mercury", '✵', ChatColor.DARK_BLUE, 7500),
+    VENUS("Venus", '✹', ChatColor.DARK_GREEN, 6200),
+    EARTH("Earth", '✸', ChatColor.BLUE, 5000),
+    MARS("Mars", '✸', ChatColor.YELLOW, 4200),
+    JUPITER("Jupiter", '✶', ChatColor.WHITE, 3200),
+    SATURN("Saturn", '✶', ChatColor.DARK_GRAY, 2450),
+    URANUS("Uranus", '✶', ChatColor.GRAY, 1750),
+    NEPTUNE("Neptune", '=', ChatColor.WHITE, 1000),
+    COMET("Comet", '☄', ChatColor.WHITE, 0);
 
     private final String name;
     private final char symbol;
@@ -55,6 +59,6 @@ public enum PlayerRank {
             if (xp >= rank.getXp())
                 return rank;
         }
-        return IMMORTAL;
+        return INFINITY;
     }
 }
