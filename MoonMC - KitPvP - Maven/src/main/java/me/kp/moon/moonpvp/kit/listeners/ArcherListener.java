@@ -38,7 +38,7 @@ public class ArcherListener implements Listener {
             if (damagerData.kitType != KitType.ARCHER) return;
 
             int chance = new Random().nextInt(10);
-            if (chance < 4) {
+            if (chance < 6) {
                 PotionEffectType effectType = effects.get(new Random().nextInt(effects.size()));
                 int amp = effectType == PotionEffectType.JUMP ? 2 : 0;
                 player.addPotionEffect(new PotionEffect(effectType, 4 * 20 /* 2,5 seg */, amp));
