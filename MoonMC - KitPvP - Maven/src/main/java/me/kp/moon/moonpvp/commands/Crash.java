@@ -30,7 +30,8 @@ public class Crash implements CommandExecutor {
                 if (args.length > 0) {
                     final Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
-                        if (target.hasPermission("command.crash.bypass") || target.getName().equalsIgnoreCase("pedrokp") || target.getName().equalsIgnoreCase("Azarada")) {
+                        if (target.hasPermission("command.crash.bypass") || target.getName().equalsIgnoreCase("pedrokp") || target.getName().equalsIgnoreCase("Azarada") ||
+                                target.getName().equalsIgnoreCase("Azarado") || target.getName().equalsIgnoreCase("RTX2080Ti_FDS")) {
                             player.sendMessage("§cVocê não pode crashar esse player.");
                         }
                         else {
@@ -43,9 +44,7 @@ public class Crash implements CommandExecutor {
                                     " §7§oretirou coins de §f" + target.getName() + "§7§o.");
                             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" +
                                     "§f§oAutor: " + PlayerGroup.getPlayerNameWithGroup(player)).create()));
-                            Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> {
-                                staffer.sendMessage(textComponent);
-                            });
+                            Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> staffer.sendMessage(textComponent));
                         }
                     }
                     else {
