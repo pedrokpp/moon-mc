@@ -66,6 +66,7 @@ public class PlayerLoginJoinQuit implements Listener {
         if (clanTag != null)
             playerData.setCacheLastClan("§" + ClanSQL.getClanColor(clanTag) + "[" + clanTag + "]");
         else playerData.setCacheLastClan("");
+        playerData.setUsername(player.getName());
         PlayerUtils.changePlayerTag(player, playerData.playerTag, playerData);
         PlayerUtils.sendPlayerToSpawn(player);
         PlayerUtils.giveInitialItems(player);
@@ -129,7 +130,6 @@ public class PlayerLoginJoinQuit implements Listener {
             Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> staffer.sendMessage(textComponent));
         }
         playerData.setLastTag(player.getDisplayName().replace(player.getName(), "").trim());
-        playerData.setUsername(player.getName());
 
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> MySQL.updatePlayer(playerData, false));
 

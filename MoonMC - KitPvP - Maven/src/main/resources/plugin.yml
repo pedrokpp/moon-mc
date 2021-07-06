@@ -163,3 +163,7 @@ commands:
     description: medalhas!!
     aliases:
       - medalhas
+  fake:
+    description: te fraga semabho
+    aliases:
+      - nick

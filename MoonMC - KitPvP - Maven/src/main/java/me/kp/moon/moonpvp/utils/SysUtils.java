@@ -20,7 +20,8 @@ public class SysUtils {
     public static boolean clans = true;
 
     public static final String webhookURLLOGGRANT = "https://discord.com/api/webhooks/860993843351781416/JWi2DQ6Fy2YOZM5MrDTS_p6sxmeeSGhiosfq1NZi6fRjQfm0tfLPKp7c7-BXKdNemIfS";
-    
+    public static final String webhookURLLOGFAKE = "https://discord.com/api/webhooks/861766145299578881/cQqFK2NJLvhtCcsexsDjKrjTWa6mEBHQuvZvUxXWhPSmgdNJHXvksTGfTqY263PHdzSk";
+
     private static final List<Location> spawnLocs = Arrays.asList(new Location(Bukkit.getWorlds().get(0), 478.0, 74.0, 274.0), new Location(Bukkit.getWorlds().get(0), 431.0, 74.0, 338.0),
             new Location(Bukkit.getWorlds().get(0), 338.0, 74.0, 314.0), new Location(Bukkit.getWorlds().get(0), 349.0, 74.0, 204.0));
 

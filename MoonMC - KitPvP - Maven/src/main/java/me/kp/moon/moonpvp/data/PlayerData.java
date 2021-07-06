@@ -20,6 +20,7 @@ public class PlayerData {
     public final UUID uuid;
 
     public String username = null;
+    public boolean fakeCooldown = false;
 
     public String soupType = "mush";
 
