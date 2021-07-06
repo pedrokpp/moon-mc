@@ -1,6 +1,5 @@
 package me.kp.moon.moonpvp;
 
-import me.kp.moon.moonpvp.api.FakeAPI;
 import me.kp.moon.moonpvp.api.TagAPI;
 import me.kp.moon.moonpvp.clan.data.ClanManager;
 import me.kp.moon.moonpvp.commands.*;

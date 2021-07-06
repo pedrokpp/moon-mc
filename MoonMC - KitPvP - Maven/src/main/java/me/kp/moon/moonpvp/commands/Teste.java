@@ -1,12 +1,9 @@
 package me.kp.moon.moonpvp.commands;
 
-import me.kp.moon.moonpvp.api.FakeAPI;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
 import me.kp.moon.moonpvp.kit.GladiatorUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

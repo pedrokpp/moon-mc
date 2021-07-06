@@ -3,7 +3,6 @@ package me.kp.moon.moonpvp.gui;
 import me.kp.moon.moonpvp.cache.PlayerCache;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
-import me.kp.moon.moonpvp.kit.KitType;
 import me.kp.moon.moonpvp.utils.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,7 +15,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class SoupTypeGUI implements Listener {
 
