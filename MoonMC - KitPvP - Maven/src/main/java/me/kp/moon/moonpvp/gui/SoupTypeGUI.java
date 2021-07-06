@@ -1,5 +1,6 @@
 package me.kp.moon.moonpvp.gui;
 
+import me.kp.moon.moonpvp.cache.PlayerCache;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.kit.KitType;
@@ -43,6 +44,10 @@ public class SoupTypeGUI implements Listener {
                         player.sendMessage("§cO seu estilo de sopa já é o selecionado.");
                     } else {
                         playerData.setSoupType("mush");
+                        if (!PlayerCache.cacheSoupType.containsKey(player.getName()))
+                            PlayerCache.cacheSoupType.put(player.getName(), "mush");
+                        else
+                            PlayerCache.cacheSoupType.replace(player.getName(), "mush");
                         player.sendMessage("§aVocê alterou seu estilo de sopa para: §eCOGUMELOS§a.");
                     }
                 } else {
@@ -50,6 +55,10 @@ public class SoupTypeGUI implements Listener {
                         player.sendMessage("§cO seu estilo de sopa já é o selecionado.");
                     } else {
                         playerData.setSoupType("cocoa");
+                        if (!PlayerCache.cacheSoupType.containsKey(player.getName()))
+                            PlayerCache.cacheSoupType.put(player.getName(), "cocoa");
+                        else
+                            PlayerCache.cacheSoupType.replace(player.getName(), "cocoa");
                         player.sendMessage("§aVocê alterou seu estilo de sopa para: §eCOCOA BEANS§a.");
                     }
                 }
