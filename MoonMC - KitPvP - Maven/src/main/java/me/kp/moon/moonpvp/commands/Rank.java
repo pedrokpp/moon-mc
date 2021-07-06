@@ -4,6 +4,7 @@ import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
 import me.kp.moon.moonpvp.enums.PlayerRank;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -36,7 +37,8 @@ public class Rank implements CommandExecutor {
                 player.sendMessage("§7Você possui §a" + playerData.cacheXP + " XP §7e faltam §a" + pontos_necessarios + " XP §7para o próximo §6rank§7.");
                 player.sendMessage(" ");
                 player.sendMessage("§7Progresso para o próximo §6rank§7:");
-                progressPercentage(playerData.cacheXP, PlayerRank.getRank(playerData).next().getXp(), player);
+                int diff = PlayerRank.getRank(playerData).next().getXp() - PlayerRank.getRank(playerData).getXp();
+                getProgressBar(pontos_necessarios, diff, player);
             }
 
         } else {
@@ -45,25 +47,21 @@ public class Rank implements CommandExecutor {
         return true;
     }
 
-    public static void progressPercentage(int remain, int total, Player player) {
-        if (remain > total) {
-            throw new IllegalArgumentException();
+    private static void getProgressBar(int atual, int total, Player player) {
+        int barSize = 10;
+        int realPorcent = 100 - (int) (((double) atual / (double) total) * 100D);
+        int barPorcent = realPorcent / 10;
+        StringBuilder bar = new StringBuilder();
+        for (int i = 0; i < barSize; i++) {
+            if (i < barPorcent) {
+                bar.append("§a§m-§r");
+            } else if (i == barPorcent) {
+                bar.append("§a§m>§r");
+            } else {
+                bar.append("§7§m-§r");
+            }
         }
-        int maxBareSize = 10;
-        int remainProcent = 100 * remain / total / maxBareSize;
-        char defaultChar = '-';
-        String icon = "§a§m-";
-        String bare = "§f§m" + new String(new char[maxBareSize]).replace('\0', defaultChar);
-        StringBuilder bareDone = new StringBuilder();
-        for (int i = 0; i < remainProcent; ++i) {
-            bareDone.append(icon);
-        }
-        bareDone.append(">§f§m");
-        String bareRemain = bare.substring(remainProcent);
-        player.sendMessage(bareDone + bareRemain + "§f §7(" + remainProcent * 10 + "% conclu\u00eddo)");
-        if (remain == total) {
-            System.out.print("\n");
-        }
+        player.sendMessage(bar + "§r §7(" + realPorcent + "% concluído)");
     }
 
 }
