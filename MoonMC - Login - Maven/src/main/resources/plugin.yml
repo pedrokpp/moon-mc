@@ -1,0 +1,5 @@
+name: MoonLogin
+version: ${project.version}
+main: me.kp.moon.login.Main
+api-version: 1.17
+authors: [ pedrokp ]
