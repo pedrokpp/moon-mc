@@ -18,3 +18,7 @@ Responsável por lidar com todas as interações dentro do servidor
 - ### MoonWE
 
 Responsável por lidar com ações relacionadas a WorldEdit
+
+- ### MoonLogin
+
+Responsável por lidar com logins e registers
