@@ -2,6 +2,7 @@ package me.kp.moon.moonpvp.listeners;
 
 import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.api.TagAPI;
+import me.kp.moon.moonpvp.cache.PlayerCache;
 import me.kp.moon.moonpvp.clan.ClanSQL;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
@@ -67,6 +68,8 @@ public class PlayerLoginJoinQuit implements Listener {
             playerData.setCacheLastClan("§" + ClanSQL.getClanColor(clanTag) + "[" + clanTag + "]");
         else playerData.setCacheLastClan("");
         playerData.setUsername(player.getName());
+        if (PlayerCache.cacheSoupType.containsKey(player.getName()))
+            playerData.setSoupType(PlayerCache.cacheSoupType.get(player.getName()));
         PlayerUtils.changePlayerTag(player, playerData.playerTag, playerData);
         PlayerUtils.sendPlayerToSpawn(player);
         PlayerUtils.giveInitialItems(player);
