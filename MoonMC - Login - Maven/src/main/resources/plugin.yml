@@ -1,5 +1,11 @@
 name: MoonLogin
 version: ${project.version}
 main: me.kp.moon.login.Main
-api-version: 1.17
+api-version: 1.8.8
 authors: [ pedrokp ]
+load: POSTWORLD
+softdepend:
+  - packetevents
+  - ViaVersion
+  - ProtocolSupport
+  - ProtocolLib

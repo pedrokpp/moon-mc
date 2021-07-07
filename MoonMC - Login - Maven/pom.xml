@@ -43,7 +43,8 @@
                             <relocations>
                                 <relocation>
                                     <pattern>io.github.retrooper.packetevents</pattern>
-                                    <shadedPattern>io.github.retrooper.moon.packetevents</shadedPattern> <!--relocate packetevents package. choose something unique!-->
+                                    <shadedPattern>io.github.retrooper.moon.packetevents
+                                    </shadedPattern> <!--relocate packetevents package. choose something unique!-->
                                 </relocation>
                             </relocations>
                         </configuration>
@@ -76,6 +77,13 @@
             <groupId>com.destroystokyo.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
 
