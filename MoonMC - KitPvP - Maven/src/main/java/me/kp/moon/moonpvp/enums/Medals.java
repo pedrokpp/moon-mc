@@ -11,7 +11,7 @@ public enum Medals {
     DEV("§eDev", "§e☕", "§7Para quem participou do desenvolvimento do servidor."),
     EX_STAFF("§6Ex-Staff", "§6⚜", "§7Para quem já foi staff do servidor."),
     KAWAII("§dPorquinho", "§d♾", "§7Para quem é fofinho."),
-    HOMIE("§bReal Casas", "§b₨", "§7Para quem é casa."),
+    HOMIE("§bHomies", "§b₨", "§7Para quem é casa."),
     YIN_YANG("§fYin Yang", "§f☯", "§7Para quem é controlado."),
     ;
 
