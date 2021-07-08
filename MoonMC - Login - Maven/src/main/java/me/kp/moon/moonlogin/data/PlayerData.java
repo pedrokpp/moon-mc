@@ -1,4 +1,4 @@
-package me.kp.moon.login.data;
+package me.kp.moon.moonlogin.data;
 
 import lombok.Getter;
 import lombok.Setter;

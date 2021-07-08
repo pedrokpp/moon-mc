@@ -1,6 +1,6 @@
 name: MoonLogin
 version: ${project.version}
-main: me.kp.moon.login.Main
+main: me.kp.moon.moonlogin.Main
 api-version: 1.8.8
 authors: [ pedrokp ]
 load: POSTWORLD
@@ -9,3 +9,6 @@ softdepend:
   - ViaVersion
   - ProtocolSupport
   - ProtocolLib
+commands:
+  loginteste:
+    description: testedev
