@@ -41,7 +41,7 @@ public class Strings {
         motds.add((getPrefix()) + " §aVIP's §fpelos menores preços e com vantagens distribuídas! §eVá ao nosso §9/discord§e.");
         motds.add((getPrefix()) + " §fFique ligado em nossas atualizações.");
         motds.add((getPrefix()) + " §fEntre em nosso §9/discord§f!");
-        motds.add((getPrefix()) + " §fHá um player te perturbando? Considere bloqueá-lo usando §c/block§f!");
+        motds.add((getPrefix()) + " §fHá um player te perturbando? §eConsidere bloqueá-lo usando §c/block§f!");
         motds.add((getPrefix()) + " §fLembre-se de seguir as §cregras§f!");
         return motds;
     }
