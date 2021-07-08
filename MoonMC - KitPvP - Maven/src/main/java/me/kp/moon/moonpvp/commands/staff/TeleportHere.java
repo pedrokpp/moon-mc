@@ -1,5 +1,7 @@
-package me.kp.moon.moonpvp.commands;
+package me.kp.moon.moonpvp.commands.staff;
 
+import me.kp.moon.moonpvp.data.PlayerData;
+import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -7,7 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Invsee implements CommandExecutor {
+public class TeleportHere implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -15,13 +18,15 @@ public class Invsee implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if (command.getName().equalsIgnoreCase("invsee") || command.getName().equalsIgnoreCase("inv")) {
-            if (!player.hasPermission("command.invsee")) {
+        PlayerData playerData = PlayerDataManager.getPlayerData(player);
+        if (playerData == null) return true;
+        if (command.getName().equalsIgnoreCase("tphere") || command.getName().equalsIgnoreCase("teleporthere") || command.getName().equalsIgnoreCase("tptome")) {
+            if (!player.hasPermission("command.teleport")) {
                 player.sendMessage(Messages.SEM_PERMISSAO.getMessage());
                 return true;
             }
             if (args.length == 0) {
-                player.sendMessage(Messages.ARGUMENTOS_INSUFICIENTES.getUsage(command.getName() + " <player>"));
+                player.sendMessage(Messages.ARGUMENTOS_INSUFICIENTES.getUsage(label + " <player>"));
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
@@ -29,9 +34,14 @@ public class Invsee implements CommandExecutor {
                 player.sendMessage("§cNão foi possível encontrar o player §e" + args[0] + "§c.");
                 return true;
             }
-            player.sendMessage("§aVocê abriu o inventário de §e" + target.getName() + "§a.");
-            player.openInventory(target.getInventory());
+            if (target == player) {
+                player.sendMessage("§cVocê não pode teleportar você mesmo.");
+                return true;
+            }
+            player.sendMessage("§aVocê se teleportou para §e" + target.getName() + "§a.");
+            target.teleport(player.getLocation());
         }
         return false;
     }
+
 }

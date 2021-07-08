@@ -1,8 +1,7 @@
-package me.kp.moon.moonpvp.commands;
+package me.kp.moon.moonpvp.commands.staff;
 
 import me.kp.moon.moonpvp.enums.Messages;
 import me.kp.moon.moonpvp.enums.Strings;
-import me.kp.moon.moonpvp.utils.SysUtils;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -16,17 +15,18 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
-public class AvisoT implements CommandExecutor {
+public class AvisoC implements CommandExecutor {
 
-    @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (sender instanceof Player) {
             final Player player = (Player)sender;
-            if (player.hasPermission("command.avisot")) {
+            if (player.hasPermission("command.avisoc")) {
                 if (args.length > 0) {
-                    final String message = ChatColor.translateAlternateColorCodes('&', StringUtils.join(Arrays.copyOfRange(args, 0, args.length), " ")).replace("{discord}", Strings.getDiscord());
+                    final String message = ChatColor.translateAlternateColorCodes('&', StringUtils.join( Arrays.copyOfRange(args, 0, args.length), " ")).replace("{discord}", Strings.getDiscord());
                     Bukkit.getOnlinePlayers().forEach(players -> {
-                        SysUtils.sendTitle(players, " ", message);
+                        players.sendMessage(" ");
+                        players.sendMessage(Strings.getPrefix() + " §f" + message);
+                        players.sendMessage(" ");
                     });
                     TextComponent textComponent = new TextComponent("§7§o(STAFF) Aviso enviado por §f" + player.getName() + "§7§o.");
                     textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" +

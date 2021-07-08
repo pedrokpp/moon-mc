@@ -1,4 +1,4 @@
-package me.kp.moon.moonpvp.commands;
+package me.kp.moon.moonpvp.commands.staff;
 
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
@@ -12,7 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class AddMoney implements CommandExecutor {
+public class SetMoney implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -21,8 +21,8 @@ public class AddMoney implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if (command.getName().equalsIgnoreCase("addmoney")) {
-            if (!player.hasPermission("command.addmoney")) {
+        if (command.getName().equalsIgnoreCase("setmoney")) {
+            if (!player.hasPermission("command.setmoney")) {
                 player.sendMessage(Messages.SEM_PERMISSAO.getMessage());
                 return true;
             }
@@ -45,17 +45,18 @@ public class AddMoney implements CommandExecutor {
             PlayerData targetData = PlayerDataManager.getPlayerData(target);
             if (targetData == null) return true;
             int actualCoins = targetData.cacheCoins;
-            targetData.setCacheCoins(actualCoins + amount);
+            targetData.setCacheCoins(amount);
             player.sendMessage("§aVocê adicionou §7$" + amount + " §apara o player §e" + target.getName() + "§a.");
             TextComponent textComponent = new TextComponent("§7§o(STAFF) O player §f" + player.getName() +
-                    " §7§oadicionou coins para §f" + target.getName() + "§7§o.");
+                    " §7§omodificou os coins de §f" + target.getName() + "§7§o.");
             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" +
                     "§f§oDe: §a§m§o$" + actualCoins +
-                    "\n§f§oPara: §a§o$" + (actualCoins + amount)).create()));
+                    "\n§f§oPara: §a§o$" + amount).create()));
             Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> {
                 staffer.sendMessage(textComponent);
             });
         }
         return false;
     }
+
 }

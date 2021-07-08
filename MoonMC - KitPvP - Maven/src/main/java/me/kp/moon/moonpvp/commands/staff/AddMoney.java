@@ -1,4 +1,4 @@
-package me.kp.moon.moonpvp.commands;
+package me.kp.moon.moonpvp.commands.staff;
 
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
@@ -12,7 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class RemoveMoney implements CommandExecutor {
+public class AddMoney implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -21,8 +21,8 @@ public class RemoveMoney implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if (command.getName().equalsIgnoreCase("removemoney")) {
-            if (!player.hasPermission("command.removemoney")) {
+        if (command.getName().equalsIgnoreCase("addmoney")) {
+            if (!player.hasPermission("command.addmoney")) {
                 player.sendMessage(Messages.SEM_PERMISSAO.getMessage());
                 return true;
             }
@@ -31,28 +31,27 @@ public class RemoveMoney implements CommandExecutor {
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
-            if (target == null) {
-                player.sendMessage("§cNão foi posssível encontrar o player §e" + args[0] + "§c.");
-                return true;
-            }
-            PlayerData targetData = PlayerDataManager.getPlayerData(target);
-            if (targetData == null) return true;
-            int quantia;
+            int amount;
             try {
-                quantia = Integer.parseInt(args[1]);
+                amount = Integer.parseInt(args[1]);
             } catch (NumberFormatException exception) {
                 player.sendMessage(Messages.APENAS_NUMEROS_ARGS.getMessage());
                 return true;
             }
+            if (target == null) {
+                player.sendMessage("§cNão foi possível encontrar o player §e" + args[0] + "§c.");
+                return true;
+            }
+            PlayerData targetData = PlayerDataManager.getPlayerData(target);
+            if (targetData == null) return true;
             int actualCoins = targetData.cacheCoins;
-            int quantiaFinal = Math.max(actualCoins - quantia, 0);
-            targetData.setCacheCoins(quantiaFinal);
-            player.sendMessage("§cVocê removeu §7$" + quantiaFinal + " §cdo player §e" + target.getName() + "§c.");
+            targetData.setCacheCoins(actualCoins + amount);
+            player.sendMessage("§aVocê adicionou §7$" + amount + " §apara o player §e" + target.getName() + "§a.");
             TextComponent textComponent = new TextComponent("§7§o(STAFF) O player §f" + player.getName() +
-                    " §7§oretirou coins de §f" + target.getName() + "§7§o.");
+                    " §7§oadicionou coins para §f" + target.getName() + "§7§o.");
             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" +
-                    "§f§oDe: §c§m§o$" + actualCoins +
-                    "\n§f§oPara: §c§o$" + quantiaFinal).create()));
+                    "§f§oDe: §a§m§o$" + actualCoins +
+                    "\n§f§oPara: §a§o$" + (actualCoins + amount)).create()));
             Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> {
                 staffer.sendMessage(textComponent);
             });

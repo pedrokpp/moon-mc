@@ -3,6 +3,7 @@ package me.kp.moon.moonpvp;
 import me.kp.moon.moonpvp.api.TagAPI;
 import me.kp.moon.moonpvp.clan.data.ClanManager;
 import me.kp.moon.moonpvp.commands.*;
+import me.kp.moon.moonpvp.commands.staff.*;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Strings;

@@ -1,4 +1,4 @@
-package me.kp.moon.moonpvp.commands;
+package me.kp.moon.moonpvp.commands.staff;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

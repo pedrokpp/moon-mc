@@ -1,4 +1,4 @@
-package me.kp.moon.moonpvp.commands;
+package me.kp.moon.moonpvp.commands.staff;
 
 import me.kp.moon.moonpvp.enums.Messages;
 import me.kp.moon.moonpvp.utils.DiscordWebhook;
