@@ -75,6 +75,8 @@ commands:
     description: Desbloqueie players bloqueados
   report:
     description: Reporte players aos staffers
+  reports:
+    description: Cheque a lista de players reportados
   rptp:
     description: Staffers tp rápido report
   tp:

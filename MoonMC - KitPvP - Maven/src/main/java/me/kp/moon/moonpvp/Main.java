@@ -164,6 +164,7 @@ public final class Main extends JavaPlugin {
         getCommand("block").setExecutor(new BlockUnblock());
         getCommand("unblock").setExecutor(new BlockUnblock());
         getCommand("report").setExecutor(new Report());
+        getCommand("reports").setExecutor(new Reports());
         getCommand("rptp").setExecutor(new ReportTP());
         getCommand("tp").setExecutor(new Teleport());
         getCommand("tphere").setExecutor(new TeleportHere());

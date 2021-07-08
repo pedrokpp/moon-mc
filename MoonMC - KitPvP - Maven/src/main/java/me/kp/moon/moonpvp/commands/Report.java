@@ -1,6 +1,7 @@
 package me.kp.moon.moonpvp.commands;
 
 import me.kp.moon.moonpvp.Main;
+import me.kp.moon.moonpvp.cache.SysCache;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
@@ -43,14 +44,15 @@ public class Report implements CommandExecutor {
                 player.sendMessage("§cNão foi possível encontrar o player §e" + args[0] + "§c.");
                 return true;
             }
-            if (target == player) {
-                player.sendMessage("§cVocê não pode reportar a si mesmo.");
-                return true;
-            }
+//            if (target == player) {
+//                player.sendMessage("§cVocê não pode reportar a si mesmo.");
+//                return true;
+//            }
             PlayerData targetData = PlayerDataManager.getPlayerData(target);
             if (targetData == null) return true;
             String report = StringUtils.join(Arrays.copyOfRange(args, 1, args.length), " ");
-            if (report.length() < 3 || report.equalsIgnoreCase("hack") || report.equalsIgnoreCase("hacker")) {
+            if ((report.length() < 3 && !report.equalsIgnoreCase("ac")) || report.equalsIgnoreCase("hack")
+                    || report.equalsIgnoreCase("hacker")) {
                 player.sendMessage("§cSeja mais específico com seus reports, por favor.");
                 return true;
             }
@@ -69,6 +71,7 @@ public class Report implements CommandExecutor {
                 staffer.sendMessage(textComponent);
                 staffer.playSound(staffer.getLocation(), Sound.ARROW_HIT, 1.0f, 1.0f);
             });
+            SysCache.addReportToPlayer(player, report);
             playerData.setReportCooldown(true);
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
                 PlayerData playerData2 = PlayerDataManager.getPlayerData(player);

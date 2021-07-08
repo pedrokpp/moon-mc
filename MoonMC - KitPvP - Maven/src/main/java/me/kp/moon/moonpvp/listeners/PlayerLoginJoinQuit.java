@@ -3,6 +3,7 @@ package me.kp.moon.moonpvp.listeners;
 import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.api.TagAPI;
 import me.kp.moon.moonpvp.cache.PlayerCache;
+import me.kp.moon.moonpvp.cache.SysCache;
 import me.kp.moon.moonpvp.clan.ClanSQL;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
@@ -137,6 +138,7 @@ public class PlayerLoginJoinQuit implements Listener {
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> MySQL.updatePlayer(playerData, false));
 
         TagAPI.deletePlayer(player);
+        SysCache.cacheReports.remove(player.getName());
         PlayerDataManager.removePlayer(player);
     }
 
