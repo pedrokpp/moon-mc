@@ -88,6 +88,11 @@ public class World implements Listener {
     }
 
     @EventHandler
+    public void onItemSpawn(final ItemSpawnEvent event) {
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> event.getEntity().remove(), 10 * 20L);
+    }
+
+    @EventHandler
     public void Inventory(PlayerPickupItemEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
@@ -102,15 +107,13 @@ public class World implements Listener {
             return;
         }
         if (playerData.kitType != null || playerData.warpType != null) {
+            if (playerData.warpType == WarpType._1v1) {
+                event.setCancelled(true);
+            }
             event.setCancelled(itemStack.getType() != Material.MUSHROOM_SOUP && itemStack.getType() != Material.BOWL &&
                     itemStack.getType() != Material.BROWN_MUSHROOM && itemStack.getType() != Material.RED_MUSHROOM &&
                     (itemStack.getType() != Material.INK_SACK && itemStack.getDurability() != 3));
         }
-    }
-
-    @EventHandler
-    public void onItemSpawn(final ItemSpawnEvent event) {
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> event.getEntity().remove(), 10 * 20L);
     }
 
     @EventHandler
@@ -132,6 +135,8 @@ public class World implements Listener {
             } else {
                 if (playerData.warpType == WarpType._1v1) {
                     if (itemStack.getType() == Material.INK_SACK) event.setCancelled(true);
+                    if (itemStack.getType() == Material.STONE_SWORD) event.setCancelled(true);
+                    if (itemStack.getType() == Material.BLAZE_ROD) event.setCancelled(true);
                     return;
                 }
                 event.setCancelled(itemStack.getType() != Material.MUSHROOM_SOUP && itemStack.getType() != Material.BOWL &&
