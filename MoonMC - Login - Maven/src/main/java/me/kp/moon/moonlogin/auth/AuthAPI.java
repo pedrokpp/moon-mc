@@ -5,16 +5,12 @@ import java.util.Random;
 
 public class AuthAPI {
 
-    public static String encodeString(String str, int discriminator) {
+    public static String encodeString(String str) {
         String finalStr = str;
-        for (int i = 0; i < discriminator; i++) {
+        for (int i = 0; i < 6; i++) {
             finalStr = Base64.getEncoder().encodeToString(finalStr.getBytes());
         }
         return finalStr;
-    }
-
-    public static int genDiscriminator() {
-        return new Random().nextInt(20 - 6) + 6;
     }
 
 }

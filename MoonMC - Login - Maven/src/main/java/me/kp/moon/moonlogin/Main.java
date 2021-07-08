@@ -4,9 +4,12 @@ import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.settings.PacketEventsSettings;
 import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import me.kp.moon.moonlogin.commands.LoginTeste;
+import me.kp.moon.moonlogin.mysql.MySQL;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
+
+    MySQL mySQL = new MySQL();
 
     @Override
     public void onLoad() {
@@ -18,6 +21,7 @@ public final class Main extends JavaPlugin {
                 .checkForUpdates(false)
                 .bStats(true);
         PacketEvents.get().loadAsyncNewThread();
+        mySQL.connectToDBS();
     }
 
     @Override
