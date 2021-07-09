@@ -12,3 +12,11 @@ softdepend:
 commands:
   loginteste:
     description: testedev
+  login:
+    description: Login!@#!@#
+    aliases:
+      - logar
+  register:
+    description: REgsiter2!
+    aliases:
+      - registrar

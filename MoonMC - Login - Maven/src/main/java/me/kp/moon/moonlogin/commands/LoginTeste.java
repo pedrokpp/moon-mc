@@ -18,6 +18,9 @@ public class LoginTeste implements CommandExecutor {
             }
             sender.sendMessage("original input: " + args[0]);
             String rando = AuthAPI.encodeString(args[0]);
+            sender.sendMessage("rando: " + rando);
+            String nonrando = AuthAPI.decodeString(rando);
+            sender.sendMessage("nonrando: " + nonrando);
         }
         return false;
     }
