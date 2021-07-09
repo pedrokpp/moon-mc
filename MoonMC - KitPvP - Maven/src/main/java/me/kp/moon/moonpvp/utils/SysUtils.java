@@ -27,7 +27,7 @@ public class SysUtils {
 
     public static List<String> blacklistedWords = Arrays.asList("preto", "macaco", "filho da puta", "seu merda", "lixo", "l");
 
-    public static Location spawn = new Location(Bukkit.getWorlds().get(0), 910.5, 50, 230.5, -90, 0);
+    public static Location spawn = new Location(Bukkit.getWorlds().get(0), 910.5, 49, 230.5, -90, 0);
 
     public static void setChat(boolean chat) {
         SysUtils.chat = chat;
