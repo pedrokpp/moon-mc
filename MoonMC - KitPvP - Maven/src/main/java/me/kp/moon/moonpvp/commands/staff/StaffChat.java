@@ -3,6 +3,7 @@ package me.kp.moon.moonpvp.commands.staff;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
+import me.kp.moon.moonpvp.enums.PlayerGroup;
 import me.kp.moon.moonpvp.utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -72,7 +73,7 @@ public class StaffChat implements CommandExecutor {
                         Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> {
                             PlayerData stafferData = PlayerDataManager.getPlayerData(staffer);
                             if (stafferData == null) return;
-                            String finalMessage = "§c§l[SC] §7[%server%] " + PlayerUtils.getPlayerTag(player) + player.getName() + " §7» §f" + String.join(" ", args);
+                            String finalMessage = "§c§l[SC] §7[%server%] " + PlayerGroup.getPlayerNameWithGroup(player) + " §7» §f" + String.join(" ", args);
                             String server;
                             if (playerData.evento) server = "Evento";
                             else if (playerData.screenshare) server = "ScreenShare";

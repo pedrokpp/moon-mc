@@ -46,11 +46,11 @@ public class PlayerUtils {
         else if (player.hasPermission("displayname.gerente")) return "§9§lGERENTE §9";// "§9§lGERENTE §9" + player.getName();
         else if (player.hasPermission("displayname.admin")) return "§c§lADMIN §c";// "§3§lCOORD §3" + player.getName();
         else if (player.hasPermission("displayname.coord")) return "§3§lCOORD §3";// "§2§lMOD+ §2" + player.getName();
-        else if (player.hasPermission("displayname.modplus")) return "§2§lMOD+ §2";// "§2§lBUILDER §2" + player.getName();
+        else if (player.hasPermission("displayname.modplus")) return "§5§lMOD+ §5";// "§2§lBUILDER §2" + player.getName();
         else if (player.hasPermission("displayname.modgc")) return "§5§lMODGC §5";// "§5§lMODGC §5" + player.getName();
         else if (player.hasPermission("displayname.mod")) return "§5§lMOD §5";// "§5§lMOD §5" + player.getName();
         else if (player.hasPermission("displayname.builder")) return "§2§lBUILDER §2";// "§e§lHELPER §e" + player.getName();
-        else if (player.hasPermission("displayname.helper")) return "§e§lHELPER §e";// "§e§lHELPER §e" + player.getName();
+        else if (player.hasPermission("displayname.trial")) return "§d§lTRIAL §d";// "§e§lHELPER §e" + player.getName();
         return null;
     }
 }

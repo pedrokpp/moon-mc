@@ -48,16 +48,16 @@ public class Group implements CommandExecutor {
             }
             player.sendMessage("§aVocê definiu o cargo " + group.getColoredName() + " §apara " + group.getColor() + target.getName() + "§a.");
             target.sendMessage("§aVocê recebeu o cargo " + group.getColoredName() + " §ade " + group.getColor() + player.getName() + "§a.");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + target.getName() + " parent set " +
-                    args[1].replace("+", "plus").replace("membro", "default"));
             TextComponent textComponent = new TextComponent("§7§o(STAFF) O player §f" + player.getName() +
                     " §7§oatualizou o cargo de §f" + target.getName() + "§7§o.");
             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" +
-                    "§f§oDe: " + group.getColoredName() +
+                    "§f§oDe: " + PlayerGroup.getGroup(target).getColoredName() +
                     "\n§f§oPara: " + group.getColoredName()).create()));
             Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> {
                 staffer.sendMessage(textComponent);
             });
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + target.getName() + " parent set " +
+                    args[1].replace("+", "plus").replace("membro", "default"));
         }
         return false;
     }

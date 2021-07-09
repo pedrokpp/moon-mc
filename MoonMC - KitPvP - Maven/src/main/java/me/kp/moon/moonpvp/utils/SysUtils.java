@@ -23,7 +23,7 @@ public class SysUtils {
     public static final String webhookURLLOGFAKE = "https://discord.com/api/webhooks/861766145299578881/cQqFK2NJLvhtCcsexsDjKrjTWa6mEBHQuvZvUxXWhPSmgdNJHXvksTGfTqY263PHdzSk";
 
     private static final List<Location> spawnLocs = Arrays.asList(new Location(Bukkit.getWorlds().get(0), 478.0, 74.0, 274.0), new Location(Bukkit.getWorlds().get(0), 431.0, 74.0, 338.0),
-            new Location(Bukkit.getWorlds().get(0), 338.0, 74.0, 314.0), new Location(Bukkit.getWorlds().get(0), 349.0, 74.0, 204.0));
+            new Location(Bukkit.getWorlds().get(0), 338.0, 74.0, 314.0, -90, 0), new Location(Bukkit.getWorlds().get(0), 349.0, 74.0, 204.0));
 
     public static List<String> blacklistedWords = Arrays.asList("preto", "macaco", "filho da puta", "seu merda", "lixo", "l");
 

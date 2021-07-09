@@ -43,8 +43,8 @@ public class StaffChat extends ListenerAdapter implements Listener {
         if (PlayerUtils.inStaffChat.contains(player.getUniqueId())) {
             String message = event.getMessage();
             String finalMessage = message.replace("@everyone", "``@everyone``")
-                    .replace("@here", "``@here``").replace("@modgc", "<@&818996656623321109>");
-
+                    .replace("@here", "``@here``").replace("@modgc", "<@&819001409068335104>")
+                    .replace("/sc", "").replace("/s", "");
             PlayerUtils.sendStaffChatMineToDiscord(player, finalMessage, BotUtils.webhookClient);
         }
     }
