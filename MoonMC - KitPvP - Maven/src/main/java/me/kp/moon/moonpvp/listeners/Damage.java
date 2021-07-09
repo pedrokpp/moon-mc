@@ -41,6 +41,10 @@ public class Damage implements Listener {
         if (damagerData.evento) return;
         if (playerData.admin || playerData.superadmin || playerData.vanish) event.setCancelled(true);
         if (damagerData.admin || damagerData.superadmin || damagerData.vanish) event.setCancelled(true);
+        if (playerData.warpType == WarpType._1v1 || playerData.warpType == WarpType.SUMO) {
+            if (playerData.inDuel && !damagerData.inDuel) event.setCancelled(true);
+            if (!playerData.inDuel && !damagerData.inDuel) event.setCancelled(true);
+        }
     }
 
 }
