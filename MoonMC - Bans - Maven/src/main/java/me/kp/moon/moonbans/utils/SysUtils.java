@@ -19,7 +19,7 @@ public class SysUtils {
 
     public static List<String> whitelist = Arrays.asList("pedrokp", "177.192.0.92", "Azarada", "189.7.67.221", "Azarado", "187.2.176.72", "RTX2080Ti_FDS", "191-221-135-106.user3p.brasiltelecom.net.br" ,"sudanor");
 
-    public static IPInfo ipInfo = IPInfo.builder().setToken("112b3614fc802c").setCache(new SimpleCache(Duration.ofDays(5))).build();
+    public static IPInfo ipInfo = IPInfo.builder().setToken("112b3614fc802c").build();
 
     public static String timeConverter(Long ms) {
         LocalDateTime ldt = LocalDateTime.ofInstant(Instant.ofEpochMilli(ms), ZoneId.systemDefault());

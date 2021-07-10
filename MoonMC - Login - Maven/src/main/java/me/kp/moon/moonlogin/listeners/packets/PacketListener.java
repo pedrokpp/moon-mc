@@ -69,6 +69,7 @@ public class PacketListener extends PacketListenerAbstract {
                         Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " se autenticou com sucesso.");
                         AuthAPI.authPlayer(playerData);
                     }
+                    return;
                 }
                 if (packet.getMessage().startsWith("/register") || packet.getMessage().startsWith("/registrar")) {
                     String[] args = packet.getMessage().replace("/register ", "").replace("/registrar ", "")
@@ -100,6 +101,7 @@ public class PacketListener extends PacketListenerAbstract {
                 }
             } else {
                 if (packet.getMessage().startsWith("/changepassword") || packet.getMessage().startsWith("/mudarsenha")) {
+                    event.setCancelled(true);
                     String[] args = packet.getMessage().replace("/changepassword ", "").replace("/mudarsenha ", "")
                             .split(" ");
                     if (args.length < 2) {

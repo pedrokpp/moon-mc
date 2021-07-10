@@ -69,6 +69,7 @@ public class BukkitListener implements Listener {
         String welcomeMessage = playerData.getPassword() != null ? welcome.get(new Random().nextInt(welcome.size()))
                 .replace("%name%", player.getName()) : "§aSeja bem vindo ao nosso servidor!";
         SysUtils.sendTitle(player, "§9§lMoon§1§lMC", welcomeMessage);
+        Bukkit.getOnlinePlayers().forEach(p -> p.hidePlayer(player));
     }
 
     @EventHandler

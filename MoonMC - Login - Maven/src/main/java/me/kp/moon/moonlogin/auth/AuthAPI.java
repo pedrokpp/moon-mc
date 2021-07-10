@@ -2,6 +2,7 @@ package me.kp.moon.moonlogin.auth;
 
 import me.kp.moon.moonlogin.data.PlayerData;
 import me.kp.moon.moonlogin.utils.SysUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -31,6 +32,7 @@ public class AuthAPI {
         playerData.setLoggedIn(true);
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 1f);
         SysUtils.sendTitle(player, "", "§aVocê se autenticou com sucesso!");
+        Bukkit.getOnlinePlayers().forEach(p -> p.showPlayer(player));
     }
 
 }
