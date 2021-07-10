@@ -6,9 +6,12 @@ import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
 import io.github.retrooper.packetevents.packettype.PacketType;
 import io.github.retrooper.packetevents.packetwrappers.play.in.chat.WrappedPacketInChat;
 import io.github.retrooper.packetevents.packetwrappers.play.in.tabcomplete.WrappedPacketInTabComplete;
+import me.kp.moon.moonlogin.auth.AuthAPI;
 import me.kp.moon.moonlogin.data.PlayerData;
 import me.kp.moon.moonlogin.data.PlayerDataManager;
 import me.kp.moon.moonlogin.enums.Strings;
+import me.kp.moon.moonlogin.mysql.MySQL;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -42,13 +45,57 @@ public class PacketListener extends PacketListenerAbstract {
             if (!playerData.isLoggedIn()) {
                 player.teleport(Strings.spawn);
             }
-        }
-        else if (event.getPacketId() == PacketType.Play.Client.CHAT) {
+        } else if (event.getPacketId() == PacketType.Play.Client.CHAT) {
             if (!playerData.isLoggedIn()) {
+                event.setCancelled(true);
                 WrappedPacketInChat packet = new WrappedPacketInChat(event.getNMSPacket());
-                if (!(packet.getMessage().startsWith("/login") || packet.getMessage().startsWith("/register") ||
-                        packet.getMessage().startsWith("/logar") || packet.getMessage().startsWith("/registrar"))) {
-                    event.setCancelled(true);
+                if (packet.getMessage().startsWith("/login") || packet.getMessage().startsWith("/logar")) {
+                    String[] args = packet.getMessage().replace("/login ", "").replace("/logar ", "")
+                            .split(" ");
+                    if (playerData.getPassword() == null) {
+                        player.sendMessage("§cVocê ainda não registrou sua conta.");
+                        return;
+                    }
+                    if (args.length == 0) {
+                        player.sendMessage("§eUtilize o comando §7/login <senha>§e.");
+                        return;
+                    }
+                    String pass = args[0];
+                    if (!playerData.getPassword().equals(pass)) {
+                        player.sendMessage("§cSenha incorreta.");
+                    } else {
+                        player.sendMessage("§aVocê se autenticou com sucesso.");
+                        player.sendMessage("§7Guardamos sua senha com encriptação AES-GCM.");
+                        Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " se autenticou com sucesso.");
+                        AuthAPI.authPlayer(playerData);
+                    }
+                }
+                if (packet.getMessage().startsWith("/register") || packet.getMessage().startsWith("/registrar")) {
+                    String[] args = packet.getMessage().replace("/register ", "").replace("/registrar ", "")
+                            .split(" ");
+                    if (playerData.getPassword() != null) {
+                        player.sendMessage("§cVocê já registrou sua conta.");
+                        return;
+                    }
+                    if (args.length == 0) {
+                        player.sendMessage("§eUtilize o comando §7/register <senha> <senha>§e.");
+                        return;
+                    }
+                    String pass = args[0];
+                    String passConfirmation = args[1];
+                    if (!pass.equals(passConfirmation)) {
+                        player.sendMessage("§cAs senhas não são iguais. Tente novamente.");
+                        return;
+                    }
+                    if (pass.length() < 6) {
+                        player.sendMessage("§cSua senha precisa ter mais que 6 caracteres. §7(Essa senha possui " + pass.length() + " caracteres)");
+                        return;
+                    }
+                    playerData.setPassword(pass);
+                    MySQL.registerPlayer(playerData);
+                    player.sendMessage("§aVocê se autenticou com sucesso.");
+                    player.sendMessage("§7Guardamos sua senha com encriptação AES-GCM.");
+                    AuthAPI.authPlayer(playerData);
                 }
             }
         } else {
