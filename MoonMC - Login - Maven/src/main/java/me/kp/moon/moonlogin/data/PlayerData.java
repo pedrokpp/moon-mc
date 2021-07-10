@@ -13,6 +13,8 @@ public class PlayerData {
     private String password = null;
     private boolean loggedIn = false;
 
+    private boolean warnedUnregister = false;
+
     private int timer = 30;
 
     public PlayerData(Player player) {

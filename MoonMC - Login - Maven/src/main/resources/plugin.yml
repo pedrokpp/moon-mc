@@ -20,3 +20,5 @@ commands:
     description: REgsiter2!
     aliases:
       - registrar
+  unregister:
+    description: unregsiter!
