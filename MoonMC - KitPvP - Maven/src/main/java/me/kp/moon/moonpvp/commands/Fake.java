@@ -1,6 +1,5 @@
 package me.kp.moon.moonpvp.commands;
 
-import me.kp.moon.moonpvp.Main;
 import me.kp.moon.moonpvp.api.FakeAPI;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
@@ -44,29 +43,26 @@ public class Fake implements CommandExecutor {
                 }
                 String ms = System.currentTimeMillis() - timeBefore + " ms";
                 player.sendMessage("§9Alterando seu nick para §e" + playerData.username + "§a...");
-                Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-                    FakeAPI.applyFake(playerData.username, playerData);
-                    player.sendMessage("§aSeu nick foi alterado para §e" + playerData.username + "§a. §8[" + ms + "]\n" +
-                            "§7Você poderá escolher outro fake novamente em 15 segundos.");
-                });
+                FakeAPI.applyFake(playerData.username, playerData);
+                player.sendMessage("§aSeu nick foi alterado para §e" + playerData.username + "§a. §8[" + ms + "]\n" +
+                        "§7Você poderá escolher outro fake novamente em 15 segundos.");
                 return false;
             }
             if (args[0].length() < 3 || args[0].length() > 16) {
                 player.sendMessage("§cO nick apresentado é inválido.");
                 return true;
             }
-            Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-                if (Bukkit.getPlayer(args[0]) != null || Bukkit.getOnlinePlayers().stream().anyMatch(p -> p.getName().equalsIgnoreCase(args[0])) ||
-                        MySQL.playerExiste(args[0])) {
-                    player.sendMessage("§cEsse player já está registrado no banco de dados.");
-                    return;
-                }
-                String ms = System.currentTimeMillis() - timeBefore + " ms";
-                player.sendMessage("§9Alterando seu nick para §e" + args[0] + "§a...");
-                FakeAPI.applyFake(args[0], playerData);
-                player.sendMessage("§aSeu nick foi alterado para §e" + args[0] + "§a. §8[" + ms + "]\n" +
-                        "§7Você poderá escolher outro fake novamente em 15 segundos.");
-            });
+            if (Bukkit.getPlayer(args[0]) != null || Bukkit.getOnlinePlayers().stream().anyMatch(p -> p.getName().equalsIgnoreCase(args[0])) ||
+                    MySQL.playerExiste(args[0])) {
+                player.sendMessage("§cEsse player já está registrado no banco de dados.");
+                return true;
+            }
+            String ms = System.currentTimeMillis() - timeBefore + " ms";
+            player.sendMessage("§9Alterando seu nick para §e" + args[0] + "§a...");
+            FakeAPI.applyFake(args[0], playerData);
+            player.sendMessage("§aSeu nick foi alterado para §e" + args[0] + "§a. §8[" + ms + "]\n" +
+                    "§7Você poderá escolher outro fake novamente em 15 segundos.");
+
         }
         return false;
     }

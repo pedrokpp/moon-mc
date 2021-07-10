@@ -1,5 +1,6 @@
 package me.kp.moon.moonpvp.commands;
 
+import me.kp.moon.moonpvp.api.FakeAPI;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
@@ -22,8 +23,9 @@ public class Info implements CommandExecutor {
                     if (target != null) {
                         PlayerData targetData = PlayerDataManager.getPlayerData(target);
                         if (targetData == null) return true;
+                        String fake = FakeAPI.hasFake(targetData) ? " §e[" + targetData.username + "]" : "";
                         player.sendMessage("§aInformações sobre o player §e" + target.getName() + "§a:");
-                        player.sendMessage("§aNick: §f" + target.getName());
+                        player.sendMessage("§aNick: §f" + target.getName() + fake);
                         String kit = targetData.kitType == null ? "Nenhum" : targetData.kitType.getKitname();
                         player.sendMessage("§aKit: §f" + kit);
                         String warp = targetData.warpType == null ? "Nenhuma" : targetData.warpType.getWarpName();
