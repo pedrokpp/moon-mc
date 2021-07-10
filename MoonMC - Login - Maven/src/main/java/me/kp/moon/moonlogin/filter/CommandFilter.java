@@ -10,9 +10,8 @@ import org.apache.logging.log4j.message.Message;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.LogRecord;
 
-public class CommandFilter{
+public class CommandFilter {
 
     private final List<String> blockedCommands = Arrays.asList("/login", "/logar", "/register", "/registrar", "/mudarsenha", "/changepassword");
 
@@ -22,7 +21,7 @@ public class CommandFilter{
 //    }
 
     public void hideConsoleMessages() {
-        ((Logger)LogManager.getRootLogger()).addFilter(new Filter() {
+        ((Logger) LogManager.getRootLogger()).addFilter(new Filter() {
 
             @Override
             public Result getOnMismatch() {

@@ -6,12 +6,9 @@ import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
 import io.github.retrooper.packetevents.packettype.PacketType;
 import io.github.retrooper.packetevents.packetwrappers.play.in.chat.WrappedPacketInChat;
 import io.github.retrooper.packetevents.packetwrappers.play.in.tabcomplete.WrappedPacketInTabComplete;
-import me.kp.moon.moonlogin.auth.AuthAPI;
 import me.kp.moon.moonlogin.data.PlayerData;
 import me.kp.moon.moonlogin.data.PlayerDataManager;
 import me.kp.moon.moonlogin.enums.Strings;
-import me.kp.moon.moonlogin.mysql.MySQL;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -19,12 +16,12 @@ import java.util.List;
 
 public class PacketListener extends PacketListenerAbstract {
 
+    List<Byte> packetTypeList = Arrays.asList(PacketType.Play.Server.SPAWN_ENTITY, PacketType.Play.Server.PLAYER_INFO,
+            PacketType.Play.Client.SETTINGS);
+
     public PacketListener() {
         super(PacketListenerPriority.HIGH);
     }
-
-    List<Byte> packetTypeList = Arrays.asList(PacketType.Play.Server.SPAWN_ENTITY, PacketType.Play.Server.PLAYER_INFO,
-            PacketType.Play.Client.SETTINGS);
 
     @Override
     public void onPacketPlayReceive(PacketPlayReceiveEvent event) {

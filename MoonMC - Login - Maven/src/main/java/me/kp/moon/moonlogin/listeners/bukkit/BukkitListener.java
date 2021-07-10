@@ -31,11 +31,9 @@ public class BukkitListener implements Listener {
 
         if (ProxyList.proxyList.contains(ip)) {
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cProxy detectado em sua conexão."));
-        }
-        else if (Bukkit.getOnlinePlayers().stream().filter(p -> p.getAddress().getHostName().equals(ip)).count() > 2) {
+        } else if (Bukkit.getOnlinePlayers().stream().filter(p -> p.getAddress().getHostName().equals(ip)).count() > 2) {
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cVocê excedeu o limite máximo de contas conectadas por IP no servidor."));
-        }
-        else if (SysCache.isIpCached(ip)) {
+        } else if (SysCache.isIpCached(ip)) {
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cVocê reconectou muito rápido e por isso, sua conexão foi bloqueada. Tente novamente em alguns segundos."));
         }
 

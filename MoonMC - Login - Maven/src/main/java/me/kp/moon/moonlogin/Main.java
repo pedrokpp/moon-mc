@@ -17,8 +17,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.logging.Filter;
-
 public final class Main extends JavaPlugin {
 
     MySQL mySQL = new MySQL();
@@ -84,7 +82,8 @@ public final class Main extends JavaPlugin {
                 }
                 if (playerData.getPassword() == null) {
                     SysUtils.sendActionBar(player, "§cVocê tem " + playerData.getTimer() + " segundos para se registrar.");
-                    if (playerData.getTimer() % 3 == 0) player.sendMessage("§eUtilize o comando §7/register <senha> <senha>§e.");
+                    if (playerData.getTimer() % 3 == 0)
+                        player.sendMessage("§eUtilize o comando §7/register <senha> <senha>§e.");
                 } else {
                     SysUtils.sendActionBar(player, "§cVocê tem " + playerData.getTimer() + " segundos para logar.");
                     if (playerData.getTimer() % 3 == 0) player.sendMessage("§eUtilize o comando §7/login <senha>§e.");
@@ -97,7 +96,7 @@ public final class Main extends JavaPlugin {
             PlayerData playerData = PlayerDataManager.getPlayerData(player);
             if (playerData == null) return;
             if (playerData.isKickable()) player.kickPlayer("§aSua senha foi alterada.");
-        }),0L, 0L);
+        }), 0L, 0L);
     }
 
 }

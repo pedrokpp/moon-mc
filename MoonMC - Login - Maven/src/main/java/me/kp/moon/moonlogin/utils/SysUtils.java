@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class SysUtils {
 
     public static void sendActionBar(final Player player, final String message) {
-        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{'text': '" + message + "'}"), (byte)2));
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{'text': '" + message + "'}"), (byte) 2));
     }
 
     public static void sendTitle(final Player player, final String title, final String subTitle) {
@@ -18,9 +18,9 @@ public class SysUtils {
         final PacketPlayOutTitle titulo = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, chatTitle);
         final PacketPlayOutTitle subtitulo = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, chatSubtitle);
         final PacketPlayOutTitle length = new PacketPlayOutTitle(5, 50, 5);
-        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(subtitulo);
-        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(titulo);
-        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(length);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(subtitulo);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(titulo);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
     }
 
 }
