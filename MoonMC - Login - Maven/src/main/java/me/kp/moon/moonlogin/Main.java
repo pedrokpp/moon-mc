@@ -7,6 +7,7 @@ import me.kp.moon.moonlogin.commands.*;
 import me.kp.moon.moonlogin.data.PlayerData;
 import me.kp.moon.moonlogin.data.PlayerDataManager;
 import me.kp.moon.moonlogin.enums.Strings;
+import me.kp.moon.moonlogin.filter.CommandFilter;
 import me.kp.moon.moonlogin.listeners.bukkit.BukkitListener;
 import me.kp.moon.moonlogin.listeners.packets.PacketListener;
 import me.kp.moon.moonlogin.mysql.MySQL;
@@ -15,6 +16,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Filter;
 
 public final class Main extends JavaPlugin {
 
@@ -45,6 +48,8 @@ public final class Main extends JavaPlugin {
         registerEvents();
         registerCommands();
         scheduleTasks();
+        CommandFilter filter = new CommandFilter();
+        filter.hideConsoleMessages();
         Bukkit.getConsoleSender().sendMessage("§9[MoonLogin] §aPlugin habilitado");
     }
 

@@ -32,6 +32,8 @@ public class AuthAPI {
         playerData.setLoggedIn(true);
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 1f);
         SysUtils.sendTitle(player, "", "§aVocê se autenticou com sucesso!");
+        SysUtils.sendActionBar(player, "§aChame seus amigos para o §9Moon§1MC§a!");
+        Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " se autenticou com sucesso.");
         Bukkit.getOnlinePlayers().forEach(p -> p.showPlayer(player));
     }
 
