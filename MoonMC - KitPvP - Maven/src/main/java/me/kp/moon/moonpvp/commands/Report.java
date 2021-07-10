@@ -1,6 +1,7 @@
 package me.kp.moon.moonpvp.commands;
 
 import me.kp.moon.moonpvp.Main;
+import me.kp.moon.moonpvp.api.FakeAPI;
 import me.kp.moon.moonpvp.cache.SysCache;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
@@ -59,11 +60,13 @@ public class Report implements CommandExecutor {
             player.sendMessage("§aVocê reportou o player §e" + target.getName() + "§a.");
             String kitTarget = targetData.kitType == null ? "Nenhum" : targetData.kitType.getKitname();
             String kitPlayer = playerData.kitType == null ? "Nenhum" : playerData.kitType.getKitname();
+            String fake = FakeAPI.hasFake(playerData) ? " §e[" + playerData.username + "] " : "";
+            String fakeT = FakeAPI.hasFake(targetData) ? " §e[" + targetData.username + "] " : "";
             PlayerUtils.sendMessageToStaff(" \n" +
                     "  §c§lALERTA DE REPORT " +
-                    "\n§fReportado: §c" + target.getName() + " §7(" + PlayerUtils.getPlayerPing(target) + "ms | " + kitTarget + "§7)" +
+                    "\n§fReportado: §c" + target.getName() + fake +  "§7(" + PlayerUtils.getPlayerPing(target) + "ms | " + kitTarget + "§7)" +
                     "\n§fMotivo: §a" + report +
-                    "\n§fAutor: §a" + player.getName() + " §7(" + PlayerUtils.getPlayerPing(player) + "ms | " + kitPlayer + "§7)");
+                    "\n§fAutor: §a" + player.getName() + fakeT + "§7(" + PlayerUtils.getPlayerPing(player) + "ms | " + kitPlayer + "§7)");
             TextComponent textComponent = new TextComponent("§7[Clique aqui para ir até §f" + target.getName() + "§7] \n ");
             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§aClique para teleportar-se!").create()));
             textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rptp " + target.getName()));

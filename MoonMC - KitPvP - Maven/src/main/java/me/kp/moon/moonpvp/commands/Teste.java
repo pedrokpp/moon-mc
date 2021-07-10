@@ -4,6 +4,7 @@ import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
 import me.kp.moon.moonpvp.kit.GladiatorUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,6 +25,10 @@ public class Teste implements CommandExecutor {
             }
             PlayerData playerData = PlayerDataManager.getPlayerData(player);
             if (playerData == null) return true;
+            if (args.length == 0) {
+                player.sendMessage(Bukkit.getOfflinePlayers().length + " players");
+                return false;
+            }
             if (args[0].equalsIgnoreCase("l")) {
                 GladiatorUtils.clearArena(player.getLocation());
                 return false;

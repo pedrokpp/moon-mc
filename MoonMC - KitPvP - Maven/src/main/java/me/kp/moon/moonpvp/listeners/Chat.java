@@ -1,5 +1,6 @@
 package me.kp.moon.moonpvp.listeners;
 
+import me.kp.moon.moonpvp.api.FakeAPI;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Medals;
@@ -39,10 +40,11 @@ public class Chat implements Listener {
 
         if (playerData.staffChat) {
             event.setCancelled(true);
+            String fake = FakeAPI.hasFake(playerData) ? " §e[" + playerData.username + "]" : "";
             Bukkit.getOnlinePlayers().stream().filter(staff -> staff.hasPermission("command.staffchat")).forEach(staffer -> {
                 PlayerData stafferData = PlayerDataManager.getPlayerData(staffer);
                 if (stafferData == null) return;
-                String finalMessage = "§c§l[SC] §7[%server%] " + PlayerGroup.getPlayerNameWithGroup(player) + " §7» §f" + message;
+                String finalMessage = "§c§l[SC] §7[%server%] " + PlayerGroup.getPlayerNameWithGroup(player) + fake + " §7» §f" + message;
                 String server;
                 if (playerData.evento) server = "Evento";
                 else if (playerData.screenshare) server = "ScreenShare";

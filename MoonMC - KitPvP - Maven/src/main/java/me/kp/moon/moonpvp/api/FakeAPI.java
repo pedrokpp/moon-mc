@@ -1,6 +1,7 @@
 package me.kp.moon.moonpvp.api;
 
 import me.kp.moon.moonpvp.Main;
+import me.kp.moon.moonpvp.cache.SysCache;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.PlayerTag;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class FakeAPI {
 
@@ -49,7 +51,7 @@ public class FakeAPI {
             PlayerData newData = PlayerDataManager.getPlayerData(playerData.getPlayer());
             if (newData == null) return;
             newData.setFakeCooldown(false);
-        }, 90 * 20L);
+        }, 15 * 20L);
     }
 
     private static boolean logWebhook(PlayerData playerData, String fake) {
@@ -74,8 +76,14 @@ public class FakeAPI {
     public static void applyFake(String fake, PlayerData playerData) {
         Player player = playerData.getPlayer();
         if (!logWebhook(playerData, fake)) return;
+        List<String> reports = SysCache.cacheReports.get(player.getName());
+        if (reports != null && reports.size() > 0) {
+            SysCache.cacheReports.remove(player.getName());
+            SysCache.cacheReports.put(fake, reports);
+        }
         changeGamerProfileName(fake, player);
         addFakeCooldown(playerData);
+        TagAPI.deletePlayer(player);
         PlayerUtils.changePlayerTag(player, PlayerTag.MEMBRO, playerData);
     }
 
