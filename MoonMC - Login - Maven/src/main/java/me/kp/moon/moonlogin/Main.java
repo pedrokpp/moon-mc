@@ -60,6 +60,7 @@ public final class Main extends JavaPlugin {
         getCommand("register").setExecutor(new Register());
         getCommand("unregister").setExecutor(new Unregister());
         getCommand("forcelogin").setExecutor(new ForceLogin());
+        getCommand("changepassword").setExecutor(new ChangePassword());
     }
 
     private void registerEvents() {
@@ -86,6 +87,12 @@ public final class Main extends JavaPlugin {
                 playerData.setTimer(playerData.getTimer() - 1);
             }
         }), 0L, 20L);
+
+        Bukkit.getScheduler().runTaskTimer(this, () -> Bukkit.getOnlinePlayers().forEach(player -> {
+            PlayerData playerData = PlayerDataManager.getPlayerData(player);
+            if (playerData == null) return;
+            if (playerData.isKickable()) player.kickPlayer("§aSua senha foi alterada.");
+        }),0L, 0L);
     }
 
 }

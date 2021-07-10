@@ -24,3 +24,7 @@ commands:
     description: unregsiter!
   forcelogin:
     description: cshseh
+  changepassword:
+    description: change!!@#
+    aliases:
+      - mudarsenha

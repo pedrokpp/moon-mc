@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class BukkitListener implements Listener {
 
-    private final List<String> welcome = Arrays.asList("§aEstavamos te esperando, %name%!", "§aHá quanto tempo!", "§aSeja bem vindo novamente!", "Se divirta no servidor, %name%!");
+    private final List<String> welcome = Arrays.asList("§aEstavamos te esperando, %name%!", "§aHá quanto tempo!", "§aSeja bem vindo novamente!", "§aSe divirta no servidor, %name%!");
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void AsyncPreLogin(AsyncPlayerPreLoginEvent event) {
@@ -49,6 +49,10 @@ public class BukkitListener implements Listener {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         if (playerData == null) {
             event.disallow(PlayerLoginEvent.Result.KICK_OTHER, "§cOcorreu um erro.");
+            return;
+        }
+        if (Bukkit.getOnlinePlayers().stream().filter(p -> p.getName().equalsIgnoreCase(player.getName())).count() >= 1) {
+            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cJá existe um player conectado com esse nick."));
             return;
         }
         // tentar pegar o cache da senha, checando se o player existe no dbs

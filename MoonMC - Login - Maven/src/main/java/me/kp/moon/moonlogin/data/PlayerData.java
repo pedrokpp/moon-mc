@@ -15,6 +15,8 @@ public class PlayerData {
 
     private boolean warnedUnregister = false;
 
+    private boolean kickable = false;
+
     private int timer = 30;
 
     public PlayerData(Player player) {

@@ -46,9 +46,9 @@ public class PacketListener extends PacketListenerAbstract {
                 player.teleport(Strings.spawn);
             }
         } else if (event.getPacketId() == PacketType.Play.Client.CHAT) {
+            WrappedPacketInChat packet = new WrappedPacketInChat(event.getNMSPacket());
             if (!playerData.isLoggedIn()) {
                 event.setCancelled(true);
-                WrappedPacketInChat packet = new WrappedPacketInChat(event.getNMSPacket());
                 if (packet.getMessage().startsWith("/login") || packet.getMessage().startsWith("/logar")) {
                     String[] args = packet.getMessage().replace("/login ", "").replace("/logar ", "")
                             .split(" ");
@@ -95,7 +95,28 @@ public class PacketListener extends PacketListenerAbstract {
                     MySQL.registerPlayer(playerData);
                     player.sendMessage("§aVocê se autenticou com sucesso.");
                     player.sendMessage("§7Guardamos sua senha com encriptação AES-GCM.");
+                    Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " se autenticou com sucesso.");
                     AuthAPI.authPlayer(playerData);
+                }
+            } else {
+                if (packet.getMessage().startsWith("/changepassword") || packet.getMessage().startsWith("/mudarsenha")) {
+                    String[] args = packet.getMessage().replace("/changepassword ", "").replace("/mudarsenha ", "")
+                            .split(" ");
+                    if (args.length < 2) {
+                        player.sendMessage("§cArgumentos insuficientes. §7/changepassword <antiga> <nova>");
+                        return;
+                    }
+                    if (!args[0].equals(playerData.getPassword())) {
+                        player.sendMessage("§cSenha atual não corresponde com a apresentada.");
+                        return;
+                    }
+                    if (args[1].length() < 6) {
+                        player.sendMessage("§cSua nova senha precisa ter no mínimo 6 caracteres.");
+                        return;
+                    }
+                    MySQL.updatePassword(player, args[1], false);
+                    Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " alterou sua senha.");
+                    playerData.setKickable(true);
                 }
             }
         } else {
