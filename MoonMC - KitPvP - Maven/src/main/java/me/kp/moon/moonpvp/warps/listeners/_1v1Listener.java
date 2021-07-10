@@ -23,6 +23,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -182,6 +183,10 @@ public class _1v1Listener implements Listener {
         }
         if ((playerData.warpType == WarpType._1v1 && killerData.warpType == WarpType._1v1)) {
             event.getDrops().forEach(drop -> drop.setType(Material.AIR));
+            player.sendMessage("§cVocê perdeu 1v1 contra §7" + killer.getName() + " §cque ficou com §7" + killer.getHealth() + " §ccorações e §7" +
+                    Arrays.stream(killer.getInventory().getContents()).filter(item -> item.getType() == Material.MUSHROOM_SOUP).count() + " §csopas.");
+            killer.sendMessage("§aVocê ganhou 1v1 contra §7" + killer.getName() + " §acom §7" + killer.getHealth() + " §acorações e §7" +
+                    Arrays.stream(killer.getInventory().getContents()).filter(item -> item.getType() == Material.MUSHROOM_SOUP).count() + " §asopas.");
             PlayerUtils.killerKillPlayer(killer, killerData, playerData);
             PlayerUtils.deadKillPlayer(player, playerData, killer);
             autoRespawn(player);
