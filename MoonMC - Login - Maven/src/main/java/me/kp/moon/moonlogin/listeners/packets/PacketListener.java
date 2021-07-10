@@ -48,8 +48,8 @@ public class PacketListener extends PacketListenerAbstract {
         } else if (event.getPacketId() == PacketType.Play.Client.CHAT) {
             WrappedPacketInChat packet = new WrappedPacketInChat(event.getNMSPacket());
             if (!playerData.isLoggedIn()) {
-                event.setCancelled(true);
                 if (packet.getMessage().startsWith("/login") || packet.getMessage().startsWith("/logar")) {
+                    event.setCancelled(true);
                     String[] args = packet.getMessage().replace("/login ", "").replace("/logar ", "")
                             .split(" ");
                     if (playerData.getPassword() == null) {
@@ -69,9 +69,9 @@ public class PacketListener extends PacketListenerAbstract {
                         Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " se autenticou com sucesso.");
                         AuthAPI.authPlayer(playerData);
                     }
-                    return;
                 }
-                if (packet.getMessage().startsWith("/register") || packet.getMessage().startsWith("/registrar")) {
+                else if (packet.getMessage().startsWith("/register") || packet.getMessage().startsWith("/registrar")) {
+                    event.setCancelled(true);
                     String[] args = packet.getMessage().replace("/register ", "").replace("/registrar ", "")
                             .split(" ");
                     if (playerData.getPassword() != null) {
@@ -98,6 +98,9 @@ public class PacketListener extends PacketListenerAbstract {
                     player.sendMessage("§7Guardamos sua senha com encriptação AES-GCM.");
                     Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " se autenticou com sucesso.");
                     AuthAPI.authPlayer(playerData);
+                }
+                else {
+                    event.setCancelled(true);
                 }
             } else {
                 if (packet.getMessage().startsWith("/changepassword") || packet.getMessage().startsWith("/mudarsenha")) {
