@@ -22,24 +22,23 @@ public class ChangePassword implements CommandExecutor {
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         if (playerData == null) return true;
         if (command.getName().equalsIgnoreCase("changepassword")) {
-            player.sendMessage("§cArgumentos insuficientes. §7/" + label + " <antiga> <nova>");
+            if (args.length < 2) {
+                player.sendMessage("§cArgumentos insuficientes. §7/changepassword <antiga> <nova>");
+                return true;
+            }
+            if (!args[0].equals(playerData.getPassword())) {
+                player.sendMessage("§cSenha atual não corresponde com a apresentada.");
+                return true;
+            }
+            if (args[1].length() < 6) {
+                player.sendMessage("§cSua nova senha precisa ter no mínimo 6 caracteres.");
+                return true;
+            }
+            MySQL.updatePassword(player, args[1], false);
+            Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " alterou sua senha.");
+            playerData.setKickable(true);
             return false;
         }
-        if (args.length < 2) {
-            player.sendMessage("§cArgumentos insuficientes. §7/changepassword <antiga> <nova>");
-            return true;
-        }
-        if (!args[0].equals(playerData.getPassword())) {
-            player.sendMessage("§cSenha atual não corresponde com a apresentada.");
-            return true;
-        }
-        if (args[1].length() < 6) {
-            player.sendMessage("§cSua nova senha precisa ter no mínimo 6 caracteres.");
-            return true;
-        }
-        MySQL.updatePassword(player, args[1], false);
-        Bukkit.getConsoleSender().sendMessage("§7" + player.getName() + " alterou sua senha.");
-        playerData.setKickable(true);
         return false;
     }
 }

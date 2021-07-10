@@ -3,6 +3,7 @@ package me.kp.moon.moonlogin.listeners.packets;
 import io.github.retrooper.packetevents.event.PacketListenerAbstract;
 import io.github.retrooper.packetevents.event.PacketListenerPriority;
 import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
+import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
 import io.github.retrooper.packetevents.packettype.PacketType;
 import io.github.retrooper.packetevents.packetwrappers.play.in.chat.WrappedPacketInChat;
 import io.github.retrooper.packetevents.packetwrappers.play.in.tabcomplete.WrappedPacketInTabComplete;
@@ -17,7 +18,7 @@ import java.util.List;
 public class PacketListener extends PacketListenerAbstract {
 
     List<Byte> packetTypeList = Arrays.asList(PacketType.Play.Server.SPAWN_ENTITY, PacketType.Play.Server.PLAYER_INFO,
-            PacketType.Play.Client.SETTINGS);
+            PacketType.Play.Client.SETTINGS, PacketType.Play.Server.ENTITY_DESTROY);
 
     public PacketListener() {
         super(PacketListenerPriority.HIGH);
@@ -57,5 +58,15 @@ public class PacketListener extends PacketListenerAbstract {
             }
         }
     }
+
+//    @Override
+//    public void onPacketPlaySend(PacketPlaySendEvent event) {
+//        Player player = event.getPlayer();
+//        PlayerData playerData = PlayerDataManager.getPlayerData(player);
+//        if (playerData == null) return;
+//        if (!playerData.isLoggedIn()) {
+//            if (!packetTypeList.contains(event.getPacketId())) event.setCancelled(true);
+//        }
+//    }
 
 }
