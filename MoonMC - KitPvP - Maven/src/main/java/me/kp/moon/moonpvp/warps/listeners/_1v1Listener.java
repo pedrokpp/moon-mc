@@ -183,10 +183,10 @@ public class _1v1Listener implements Listener {
         }
         if ((playerData.warpType == WarpType._1v1 && killerData.warpType == WarpType._1v1)) {
             event.getDrops().forEach(drop -> drop.setType(Material.AIR));
-            player.sendMessage("§cVocê perdeu 1v1 contra §7" + killer.getName() + " §cque ficou com §7" + killer.getHealth() + " §ccorações e §7" +
-                    Arrays.stream(killer.getInventory().getContents()).filter(item -> item.getType() == Material.MUSHROOM_SOUP).count() + " §csopas.");
-            killer.sendMessage("§aVocê ganhou 1v1 contra §7" + killer.getName() + " §acom §7" + killer.getHealth() + " §acorações e §7" +
-                    Arrays.stream(killer.getInventory().getContents()).filter(item -> item.getType() == Material.MUSHROOM_SOUP).count() + " §asopas.");
+            player.sendMessage("§7Você §cperdeu §71v1 contra §e" + killer.getName() + " §7que ficou com §e" + killer.getHealth() + " corações §7e §e" +
+                    Arrays.stream(killer.getInventory().getContents()).filter(item -> (item != null && item.getType() == Material.MUSHROOM_SOUP)).count() + " sopas§7.");
+            killer.sendMessage("§7Você §aganhou §71v1 contra §a" + player.getName() + " §7com §a" + killer.getHealth() + " corações §7e §a" +
+                    Arrays.stream(killer.getInventory().getContents()).filter(item -> (item != null && item.getType() == Material.MUSHROOM_SOUP)).count() + " sopas§7.");
             PlayerUtils.killerKillPlayer(killer, killerData, playerData);
             PlayerUtils.deadKillPlayer(player, playerData, killer);
             autoRespawn(player);
