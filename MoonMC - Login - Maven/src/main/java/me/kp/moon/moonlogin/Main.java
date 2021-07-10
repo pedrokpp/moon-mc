@@ -3,10 +3,7 @@ package me.kp.moon.moonlogin;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.settings.PacketEventsSettings;
 import io.github.retrooper.packetevents.utils.server.ServerVersion;
-import me.kp.moon.moonlogin.commands.Login;
-import me.kp.moon.moonlogin.commands.LoginTeste;
-import me.kp.moon.moonlogin.commands.Register;
-import me.kp.moon.moonlogin.commands.Unregister;
+import me.kp.moon.moonlogin.commands.*;
 import me.kp.moon.moonlogin.data.PlayerData;
 import me.kp.moon.moonlogin.data.PlayerDataManager;
 import me.kp.moon.moonlogin.enums.Strings;
@@ -62,6 +59,7 @@ public final class Main extends JavaPlugin {
         getCommand("login").setExecutor(new Login());
         getCommand("register").setExecutor(new Register());
         getCommand("unregister").setExecutor(new Unregister());
+        getCommand("forcelogin").setExecutor(new ForceLogin());
     }
 
     private void registerEvents() {

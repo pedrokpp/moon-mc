@@ -32,6 +32,10 @@ public class ForceLogin implements CommandExecutor {
                 sender.sendMessage("§cErro interno ao encontrar este player.");
                 return true;
             }
+            if (targetData.isLoggedIn()) {
+                sender.sendMessage("§cEsse player já está logado.");
+                return true;
+            }
             AuthAPI.authPlayer(targetData);
             sender.sendMessage("§aVocê forçou o login de §e" + target.getName() + "§a.");
         }

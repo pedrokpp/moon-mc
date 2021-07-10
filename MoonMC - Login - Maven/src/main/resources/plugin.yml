@@ -22,3 +22,5 @@ commands:
       - registrar
   unregister:
     description: unregsiter!
+  forcelogin:
+    description: cshseh
