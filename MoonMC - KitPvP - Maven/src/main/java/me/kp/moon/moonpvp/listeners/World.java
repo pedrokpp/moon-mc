@@ -106,6 +106,9 @@ public class World implements Listener {
             event.setCancelled(true);
             return;
         }
+        if (playerData.warpType == WarpType._1v1 || playerData.warpType == WarpType.SUMO) {
+            event.setCancelled(true);
+        }
         if (playerData.kitType != null || playerData.warpType != null) {
             if (playerData.warpType == WarpType._1v1) {
                 event.setCancelled(true);
