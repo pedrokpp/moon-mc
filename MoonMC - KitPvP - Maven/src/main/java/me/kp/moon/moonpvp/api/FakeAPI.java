@@ -57,7 +57,7 @@ public class FakeAPI {
     private static boolean logWebhook(PlayerData playerData, String fake) {
         Player player = playerData.getPlayer();
         DiscordWebhook webhook = new DiscordWebhook(SysUtils.webhookURLLOGFAKE);
-        webhook.setContent("O player **" + player.getName() + "** mudou seu nick para ``" + fake + "``.");
+        webhook.setContent("O player **" + playerData.username + "** mudou seu nick para ``" + fake + "``.");
         try {
             webhook.execute();
         } catch (IOException e) {

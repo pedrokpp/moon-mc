@@ -56,13 +56,13 @@ public class Fake implements CommandExecutor {
                     MySQL.playerExiste(args[0])) {
                 player.sendMessage("§cEsse player já está registrado no banco de dados.");
                 return true;
+            } else {
+                String ms = System.currentTimeMillis() - timeBefore + " ms";
+                player.sendMessage("§9Alterando seu nick para §e" + args[0] + "§a...");
+                FakeAPI.applyFake(args[0], playerData);
+                player.sendMessage("§aSeu nick foi alterado para §e" + args[0] + "§a. §8[" + ms + "]\n" +
+                        "§7Você poderá escolher outro fake novamente em 15 segundos.");
             }
-            String ms = System.currentTimeMillis() - timeBefore + " ms";
-            player.sendMessage("§9Alterando seu nick para §e" + args[0] + "§a...");
-            FakeAPI.applyFake(args[0], playerData);
-            player.sendMessage("§aSeu nick foi alterado para §e" + args[0] + "§a. §8[" + ms + "]\n" +
-                    "§7Você poderá escolher outro fake novamente em 15 segundos.");
-
         }
         return false;
     }
