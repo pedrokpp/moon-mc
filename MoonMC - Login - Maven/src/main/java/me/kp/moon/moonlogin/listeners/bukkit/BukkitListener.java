@@ -1,5 +1,6 @@
 package me.kp.moon.moonlogin.listeners.bukkit;
 
+import me.kp.moon.moonlogin.auth.AuthAPI;
 import me.kp.moon.moonlogin.cache.SysCache;
 import me.kp.moon.moonlogin.data.PlayerData;
 import me.kp.moon.moonlogin.data.PlayerDataManager;
@@ -68,6 +69,10 @@ public class BukkitListener implements Listener {
                 .replace("%name%", player.getName()) : "§aSeja bem vindo ao nosso servidor!";
         SysUtils.sendTitle(player, "§9§lMoon§1§lMC", welcomeMessage);
         Bukkit.getOnlinePlayers().forEach(p -> p.hidePlayer(player));
+        if (SysCache.isPlayerIPEqualsToConnIP(player.getName(), player.getAddress().getHostName().trim())) {
+            AuthAPI.authPlayer(playerData);
+            player.sendMessage("§aVocê se autenticou pois sua sessão ainda é válida.");
+        }
     }
 
     @EventHandler

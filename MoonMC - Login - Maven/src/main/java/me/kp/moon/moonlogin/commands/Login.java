@@ -1,6 +1,7 @@
 package me.kp.moon.moonlogin.commands;
 
 import me.kp.moon.moonlogin.auth.AuthAPI;
+import me.kp.moon.moonlogin.cache.SysCache;
 import me.kp.moon.moonlogin.data.PlayerData;
 import me.kp.moon.moonlogin.data.PlayerDataManager;
 import me.kp.moon.moonlogin.enums.Strings;
@@ -39,6 +40,7 @@ public class Login implements CommandExecutor {
             } else {
                 player.sendMessage("§aVocê se autenticou com sucesso.");
                 AuthAPI.authPlayer(playerData);
+                SysCache.bindPlayerToIP(player.getName(), player.getAddress().getHostName().trim());
             }
         }
         return false;
