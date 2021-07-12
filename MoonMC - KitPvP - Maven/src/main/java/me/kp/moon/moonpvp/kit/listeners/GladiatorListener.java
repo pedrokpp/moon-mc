@@ -54,7 +54,12 @@ public class GladiatorListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void EntityDamateEntity(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player || event.getDamager() instanceof Player)) return;
-        Player damaged = (Player) event.getEntity();
+        Player damaged;
+        try {
+            damaged = (Player) event.getEntity();
+        } catch (Exception ignored) {
+            return;
+        }
         PlayerData damagedData = PlayerDataManager.getPlayerData(damaged);
         if (damagedData == null) return;
         if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
