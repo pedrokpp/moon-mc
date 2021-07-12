@@ -1,6 +1,7 @@
 package me.kp.moon.moonpvp.data;
 
 import lombok.Setter;
+import me.kp.moon.moonpvp.api.ScoreAPI;
 import me.kp.moon.moonpvp.enums.Medals;
 import me.kp.moon.moonpvp.enums.PlayerRank;
 import me.kp.moon.moonpvp.enums.PlayerTag;
@@ -9,6 +10,7 @@ import me.kp.moon.moonpvp.warps.WarpType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,8 @@ public class PlayerData {
     public String lastTag = null;
 
     public Medals medal = Medals.NENHUM;
+
+    public boolean scoreEnabled = true;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;

@@ -1,6 +1,7 @@
 package me.kp.moon.moonpvp.listeners;
 
 import me.kp.moon.moonpvp.Main;
+import me.kp.moon.moonpvp.api.ScoreAPI;
 import me.kp.moon.moonpvp.api.TagAPI;
 import me.kp.moon.moonpvp.cache.PlayerCache;
 import me.kp.moon.moonpvp.cache.SysCache;

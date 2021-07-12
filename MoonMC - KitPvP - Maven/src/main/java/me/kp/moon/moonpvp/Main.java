@@ -1,7 +1,8 @@
 package me.kp.moon.moonpvp;
 
+import me.kp.moon.moonpvp.api.HologramAPI;
+import me.kp.moon.moonpvp.api.ScoreAPI;
 import me.kp.moon.moonpvp.api.TagAPI;
-import me.kp.moon.moonpvp.clan.data.ClanManager;
 import me.kp.moon.moonpvp.commands.*;
 import me.kp.moon.moonpvp.commands.staff.*;
 import me.kp.moon.moonpvp.data.PlayerData;
@@ -45,11 +46,12 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        ClanManager.loadAllClans();
+//        ClanManager.loadAllClans();
         TagAPI.loadTeams();
-//        HologramAPI.loadTops();
-//        HologramAPI.reloadHolograms();
-//        HologramAPI.runTask();
+        HologramAPI.reloadHolograms();
+        HologramAPI.runTask();
+        ScoreAPI.setupScore();
+        ScoreAPI.runTask();
         setupRecipes();
         registerCommands();
         registerEvents();

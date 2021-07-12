@@ -11,16 +11,20 @@ import org.bukkit.scoreboard.Team;
 
 public class TagAPI {
 
-    private static final Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-
-    public static Scoreboard getScoreboard() {
-        return scoreboard;
-    }
+    private static final Scoreboard scoreboard = ScoreAPI.scoreboard;
 
     public static void loadTeams() {
         for (PlayerTag tag : PlayerTag.values()) {
             newTeam(tag);
         }
+    }
+
+    public static boolean isTeamNameTag(String teamName) {
+        for (PlayerTag tag : PlayerTag.values()) {
+            if (teamName.equalsIgnoreCase(tag.getName()))
+                return true;
+        }
+        return false;
     }
 
     public static void updatePlayerTeam(Player player, PlayerTag tag) {
@@ -32,17 +36,15 @@ public class TagAPI {
     }
 
     public static void deletePlayer(Player player) {
-        scoreboard.getTeams().forEach(team -> {
-            team.getEntries().forEach(name -> {
-                if (name.equalsIgnoreCase(player.getName())) team.removeEntry(player.getName());
-            });
-        });
+        scoreboard.getTeams().forEach(team -> team.getEntries().forEach(name -> {
+            if (name.equalsIgnoreCase(player.getName())) team.removeEntry(player.getName());
+        }));
     }
 
     public static void setScoreboard(Player player) {
 //        scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = scoreboard.getObjective("aaa");
-        if (objective == null) objective = scoreboard.registerNewObjective("aaa", "bbb");
+        if (objective == null) scoreboard.registerNewObjective("aaa", "bbb");
         PlayerData playerData = PlayerDataManager.getPlayerData(player);
         if (playerData == null) return;
 
