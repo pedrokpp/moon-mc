@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class FakeAPI {
 
@@ -66,6 +67,10 @@ public class FakeAPI {
             return false;
         }
         return true;
+    }
+
+    public static boolean isNickValid(String nick) {
+        return nick.length() >= 3 && nick.length() <= 16 && !Pattern.matches("[^a-zA-Z0-9_]", nick);
     }
 
     public static boolean hasFake(PlayerData playerData) {

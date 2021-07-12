@@ -48,7 +48,7 @@ public class Fake implements CommandExecutor {
                         "§7Você poderá escolher outro fake novamente em 15 segundos.");
                 return false;
             }
-            if (args[0].length() < 3 || args[0].length() > 16) {
+            if (!FakeAPI.isNickValid(args[0])) {
                 player.sendMessage("§cO nick apresentado é inválido.");
                 return true;
             }
