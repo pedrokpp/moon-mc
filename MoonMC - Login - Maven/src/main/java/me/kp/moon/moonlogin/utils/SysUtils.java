@@ -6,6 +6,9 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SysUtils {
 
     public static void sendActionBar(final Player player, final String message) {
@@ -21,6 +24,10 @@ public class SysUtils {
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(subtitulo);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(titulo);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
+    }
+
+    public static boolean nickHasInvalidChars(String nick) {
+        return nick.matches("\\W");
     }
 
 }

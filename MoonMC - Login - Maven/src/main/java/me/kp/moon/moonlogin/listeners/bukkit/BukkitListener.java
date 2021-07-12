@@ -54,6 +54,11 @@ public class BukkitListener implements Listener {
             event.disallow(PlayerLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cJá existe um player conectado com esse nick."));
             return;
         }
+        String name = player.getName();
+        if (name.length() < 3 || name.length() > 16 || SysUtils.nickHasInvalidChars(name)) {
+            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cSeu nick é considerado inválido."));
+            return;
+        }
         // tentar pegar o cache da senha, checando se o player existe no dbs
         // caso não exista, password == null. se não, password = decodedPassword
         MySQL.cacheDecodedPassword(playerData, true);
