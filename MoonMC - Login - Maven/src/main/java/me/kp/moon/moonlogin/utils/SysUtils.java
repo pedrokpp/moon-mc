@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SysUtils {
 
@@ -26,8 +27,10 @@ public class SysUtils {
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
     }
 
-    public static boolean nickHasInvalidChars(String nick) {
-        return nick.matches("\\W");
+    public static boolean isNickValid(String nick) {
+        Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+        if (p.matcher(nick).find()) return false;
+        return nick.length() >= 3 && nick.length() <= 16;
     }
 
 }

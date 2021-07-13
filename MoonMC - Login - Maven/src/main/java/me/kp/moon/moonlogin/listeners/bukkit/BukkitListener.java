@@ -54,8 +54,8 @@ public class BukkitListener implements Listener {
             event.disallow(PlayerLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cJá existe um player conectado com esse nick."));
             return;
         }
-        String name = player.getName();
-        if (name.length() < 3 || name.length() > 16 || SysUtils.nickHasInvalidChars(name)) {
+        String name = player.getName().trim();
+        if (!SysUtils.isNickValid(name)) {
             event.disallow(PlayerLoginEvent.Result.KICK_OTHER, Strings.getKickMessage("§cSeu nick é considerado inválido."));
             return;
         }
