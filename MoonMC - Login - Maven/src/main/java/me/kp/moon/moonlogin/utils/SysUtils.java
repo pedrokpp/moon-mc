@@ -28,7 +28,7 @@ public class SysUtils {
     }
 
     public static boolean isNickValid(String nick) {
-        Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+        Pattern p = Pattern.compile("[^a-zA-Z0-9_]");
         if (p.matcher(nick).find()) return false;
         return nick.length() >= 3 && nick.length() <= 16;
     }

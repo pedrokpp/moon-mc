@@ -15,10 +15,30 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class FakeAPI {
+
+    public static final List<String> randomNicks = Arrays.asList(
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies",
+      "nomoreLies"
+    );
 
     private static void changeGamerProfileName(String name, Player player) {
         try {
@@ -70,7 +90,7 @@ public class FakeAPI {
     }
 
     public static boolean isNickValid(String nick) {
-        Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+        Pattern p = Pattern.compile("[^a-zA-Z0-9_]");
         if (p.matcher(nick).find()) return false;
         return nick.length() >= 3 && nick.length() <= 16;
     }
@@ -88,10 +108,11 @@ public class FakeAPI {
             SysCache.cacheReports.remove(player.getName());
             SysCache.cacheReports.put(fake, reports);
         }
-        changeGamerProfileName(fake, player);
-        addFakeCooldown(playerData);
         TagAPI.deletePlayer(player);
         PlayerUtils.changePlayerTag(player, PlayerTag.MEMBRO, playerData);
+        changeGamerProfileName(fake, player);
+        PlayerUtils.changePlayerTag(player, PlayerTag.MEMBRO, playerData);
+        addFakeCooldown(playerData);
     }
 
 }

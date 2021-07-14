@@ -135,6 +135,8 @@ commands:
     description: Quantos players online
   rank:
     description: Veja informações sobre o seu rank
+    aliases:
+      - ranks
   status:
     description: Veja seus status
   evento:
