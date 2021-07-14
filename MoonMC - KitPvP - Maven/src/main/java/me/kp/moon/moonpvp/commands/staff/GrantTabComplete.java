@@ -12,7 +12,7 @@ public class GrantTabComplete implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("grant")) {
-            if (args.length >= 1) {
+            if (args.length > 1) {
                 return Arrays.asList("command.", "kit.", "pax.alerts", "worldedit");
             }
         }

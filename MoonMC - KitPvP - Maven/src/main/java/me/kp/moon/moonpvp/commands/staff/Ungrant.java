@@ -1,5 +1,7 @@
 package me.kp.moon.moonpvp.commands.staff;
 
+import me.kp.moon.moonpvp.data.PlayerData;
+import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.enums.Messages;
 import me.kp.moon.moonpvp.utils.DiscordWebhook;
 import me.kp.moon.moonpvp.utils.SysUtils;
@@ -20,6 +22,8 @@ public class Ungrant implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
+        PlayerData playerData = PlayerDataManager.getPlayerData(player);
+        if (playerData == null) return true;
         if (command.getName().equalsIgnoreCase("ungrant")) {
             if (!player.hasPermission("command.grant")) {
                 player.sendMessage(Messages.SEM_PERMISSAO.getMessage());
@@ -34,12 +38,14 @@ public class Ungrant implements CommandExecutor {
                 player.sendMessage("§cNão foi possível encontrar o player §e" + args[0] + "§c.");
                 return true;
             }
+            PlayerData targetData = PlayerDataManager.getPlayerData(target);
+            if (targetData == null) return true;
             if (!player.hasPermission(args[1])) {
                 player.sendMessage("§cVocê não consegue retirar a permissão §e" + args[1] + "§c, pois você não possui essa permissão.");
                 return true;
             }
             DiscordWebhook webhook = new DiscordWebhook(SysUtils.webhookURLLOGGRANT);
-            webhook.setContent("O player **" + player.getName() + "** deu unset na permissão ``" + args[1] + "`` para **" + target.getName() + "**.");
+            webhook.setContent("O player **" + playerData.username + "** deu unset na permissão ``" + args[1] + "`` para **" + targetData.username + "**.");
             try {
                 webhook.execute();
             } catch (IOException e) {
@@ -47,8 +53,8 @@ public class Ungrant implements CommandExecutor {
                 e.printStackTrace();
                 return true;
             }
-            player.sendMessage("§aPermissão §e" + args[1] + " §arevogada do player §e" + target.getName());
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + target.getName() + " permission unset " + args[1]);
+            player.sendMessage("§aPermissão §e" + args[1] + " §arevogada do player §e" + targetData.username);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + targetData.username + " permission unset " + args[1]);
         }
         return false;
     }
