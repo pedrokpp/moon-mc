@@ -103,16 +103,20 @@ public class GladiatorListener implements Listener {
                 PlayerUtils.removePlayerCombatLog(damagerData);
             } else if (damagedKit == KitType.GLADIATOR) {
                 Player last = damagedData.lastCombatPlayer;
-                if (damagerData.gladiatorLocation == null) {
-                    last.teleport(damagedData.gladiatorLocation);
-                    GladiatorUtils.clearArena(damagedData.gladiatorLocation);
-                } else {
-                    last.teleport(damagerData.gladiatorLocation);
-                    GladiatorUtils.clearArena(damagerData.gladiatorLocation);
+                try {
+                    if (damagerData.gladiatorLocation == null) {
+                        last.teleport(damagedData.gladiatorLocation);
+                        GladiatorUtils.clearArena(damagedData.gladiatorLocation);
+                    } else {
+                        last.teleport(damagerData.gladiatorLocation);
+                        GladiatorUtils.clearArena(damagerData.gladiatorLocation);
+                    }
+                    damagerData.setGladiatorLocation(null);
+                    damagedData.setGladiatorLocation(null);
+                    PlayerUtils.removePlayerCombatLog(damagerData);
+                } catch (Exception ignore) {
+
                 }
-                damagerData.setGladiatorLocation(null);
-                damagedData.setGladiatorLocation(null);
-                PlayerUtils.removePlayerCombatLog(damagerData);
             }
         }
     }
