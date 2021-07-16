@@ -93,6 +93,7 @@ public class _1v1Listener implements Listener {
             playerData.setInDuel(false);
             playerData.setLastDuelPlayer(null);
             playerData.setWarpType(WarpType._1v1);
+            player.setHealth(20.0);
             WarpUtils.teleportPlayerToWarp(player, playerData.warpType);
             WarpUtils.giveWarpItems(playerData);
             Bukkit.getOnlinePlayers().forEach(online -> {
