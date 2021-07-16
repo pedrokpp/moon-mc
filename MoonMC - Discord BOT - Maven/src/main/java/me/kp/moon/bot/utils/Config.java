@@ -5,10 +5,15 @@ public class Config {
     public static final String botToken = "ODU5ODcxNzI5NTEyODc0MDY2.YNy_8w.Gz-a6FYXsMjFQPWVzXCvoDDqa_o";
 
     // staff
-    public static final long roleStaffID = 1231231231;
+    public static final String roleStaffID = "813558390122741770";
+    public static final String logChannelID = "860539449255133194";
 
     // ticket
-    public static final String ticketChannelID = "823575079967391744";
-    public static final String ticketCategoryID = "860559317665316884";
+    public static final String ticketChannelID = "777739197351591976";
+    public static final String ticketCategoryID = "813941489952227378";
+    public static final String pingRoleID = "865686843273117736";
+
+    // form
+    public static final String formChannelID = "865670425274875914";
 
 }

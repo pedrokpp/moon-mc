@@ -18,8 +18,8 @@ public class SetupTicket extends ListenerAdapter {
         if (event.getMember() == null) return;
         if (event.getAuthor().isBot()) return;
         String[] message = event.getMessage().getContentRaw().split(" ");
-        String command = message[0].substring(1);
-        if (command.equalsIgnoreCase("setup-ticket")) {
+        String command = message[0];
+        if (command.equalsIgnoreCase(".setup-ticket")) {
             if (!event.getMember().hasPermission(Permission.ADMINISTRATOR)) {
                 event.getMessage().reply("Você não tem permissão para isso.").queue();
                 return;
@@ -31,7 +31,7 @@ public class SetupTicket extends ListenerAdapter {
             MessageChannel channel = event.getMessage().getMentionedChannels().get(0);
             try {
                 channel.sendMessage(new EmbedBuilder()
-                        .setAuthor("🚀 MoonMC - Sistema de Tickets", null, Main.jda.getGuilds().get(0).getIconUrl())
+                        .setAuthor("🚀 MoonMC - Sistema de Tickets", null, event.getGuild().getIconUrl())
                         .setDescription("Reaja essa mensagem para abrir um ticket.")
                         .setFooter(GlobalVariables.footer)
                         .setColor(GlobalVariables.mainColor)
