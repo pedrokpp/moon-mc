@@ -40,11 +40,25 @@ public class WarpUtils {
         if (playerData.warpType == WarpType._1v1) {
             inv.setItem(0, _1v1Listener.INVITE_ITEM);
             inv.setItem(8, _1v1Listener.OFF_QUEUE_ITEM);
+            Bukkit.getOnlinePlayers().forEach(online -> {
+                PlayerData onlineData = PlayerDataManager.getPlayerData(online);
+                if (onlineData == null) return;
+                if (onlineData.inDuel) {
+                    playerData.getPlayer().hidePlayer(online);
+                }
+            });
         }
         if (playerData.warpType == WarpType.FISHERMAN) inv.setItem(0, new ItemStack(Material.FISHING_ROD));
         if (playerData.warpType == WarpType.SUMO) {
             inv.setItem(0, SumoListener.INVITE_ITEM);
             inv.setItem(8, SumoListener.OFF_QUEUE_ITEM);
+            Bukkit.getOnlinePlayers().forEach(online -> {
+                PlayerData onlineData = PlayerDataManager.getPlayerData(online);
+                if (onlineData == null) return;
+                if (onlineData.inDuel) {
+                    playerData.getPlayer().hidePlayer(online);
+                }
+            });
         }
         if (playerData.warpType == WarpType.LAVA) {
             inv.setItem(13, new ItemStack(Material.BOWL, 64));
