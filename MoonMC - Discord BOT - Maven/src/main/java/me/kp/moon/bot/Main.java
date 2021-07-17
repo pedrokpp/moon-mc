@@ -1,5 +1,6 @@
 package me.kp.moon.bot;
 
+import me.kp.moon.bot.comandos.PingarTicket;
 import me.kp.moon.bot.comandos.SetupTicket;
 import me.kp.moon.bot.eventos.TicketReact;
 import me.kp.moon.bot.utils.Config;
@@ -34,6 +35,7 @@ public class Main {
         if (!setJDA()) return;
         jda.addEventListener(new SetupTicket());
         jda.addEventListener(new TicketReact());
+        jda.addEventListener(new PingarTicket());
     }
 
 }

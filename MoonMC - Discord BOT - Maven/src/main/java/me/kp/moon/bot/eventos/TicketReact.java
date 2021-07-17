@@ -23,6 +23,7 @@ public class TicketReact extends ListenerAdapter {
         if (!(event.getChannel().getId().equalsIgnoreCase(Config.ticketChannelID) || event.getChannel().getName().contains("ticket-")))
             return;
         if (event.getUser().isBot()) return;
+        if (!event.getReaction().getReactionEmote().isEmoji()) return;
 
         if (event.getReaction().getReactionEmote().getEmoji().equals("📩")) {
             event.getReaction().removeReaction(event.getUser()).queue();
