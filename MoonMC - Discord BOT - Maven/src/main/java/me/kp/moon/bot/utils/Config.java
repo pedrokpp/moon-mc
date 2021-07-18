@@ -16,6 +16,6 @@ public class Config {
 
     // form
     public static final String formChannelID = "865670425274875914";
-    public static final String formLandChannelID = "865670425274875914";
+    public static final String formLandChannelID = "860352890866630686";
 
 }
