@@ -14,6 +14,8 @@ public class BotUtils {
         return new Random().nextInt(max - min) + min;
     }
 
+    public static boolean clearingDM = false;
+
     public static void sendLog(String log) {
         Objects.requireNonNull(Main.jda.getTextChannelById(Config.logChannelID)).sendMessage(new EmbedBuilder()
                 .setDescription(log)
