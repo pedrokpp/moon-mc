@@ -4,7 +4,7 @@ import me.kp.moon.bot.Main;
 import me.kp.moon.bot.enums.GlobalVariables;
 import me.kp.moon.bot.utils.BotUtils;
 import me.kp.moon.bot.utils.Config;
-import me.kp.moon.bot.utils.ThreadUtils;
+import me.kp.moon.bot.utils.TicketUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.User;
@@ -13,7 +13,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class TicketReact extends ListenerAdapter {
@@ -27,7 +26,7 @@ public class TicketReact extends ListenerAdapter {
 
         if (event.getReaction().getReactionEmote().getEmoji().equals("📩")) {
             event.getReaction().removeReaction(event.getUser()).queue();
-            if (ThreadUtils.hasThread(event.getUserId())) {
+            if (TicketUtils.hasThread(event.getUserId())) {
                 event.getUser().openPrivateChannel().queue(dm ->
                         dm.sendMessage("Você já possui um ticket em aberto. Por favor aguarde o encerramento do atual.").queue(message ->
                                         message.delete().queueAfter(3, TimeUnit.SECONDS,
@@ -39,7 +38,7 @@ public class TicketReact extends ListenerAdapter {
                 return;
             }
             int rand = BotUtils.getRandomInt(1111, 9999);
-            ThreadUtils.addID(event.getUserId());
+            TicketUtils.addID(event.getUserId());
             event.getGuild().createTextChannel("ticket-" + rand, Main.jda.getCategoryById(Config.ticketCategoryID))
                     .setTopic(event.getUserId())
                     .addRolePermissionOverride(event.getGuild().getIdLong(), null, Collections.singleton(Permission.VIEW_CHANNEL))
@@ -67,7 +66,7 @@ public class TicketReact extends ListenerAdapter {
                     .setColor(GlobalVariables.mainColor)
                     .setFooter(GlobalVariables.footer)
                     .build()).queue();
-            ThreadUtils.removeID(event.getChannel().getTopic());
+            TicketUtils.removeID(event.getChannel().getTopic());
             event.getChannel().delete().queueAfter(6, TimeUnit.SECONDS);
             String topic = event.getChannel().getTopic() != null ? event.getChannel().getTopic() : "";
             User user = topic == null ? null : Main.jda.getUserById(topic);
