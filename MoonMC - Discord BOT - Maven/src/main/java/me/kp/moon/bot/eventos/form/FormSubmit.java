@@ -21,7 +21,7 @@ public class FormSubmit extends ListenerAdapter {
                         msg.delete().queueAfter(5, TimeUnit.SECONDS), err -> FormUtils.removeID(userID));
             } else {
                 FormUtils.addID(userID);
-                channel.sendMessage(FormUtils.getQuestionNumber(userID) + " numero questao").queue(null, err -> FormUtils.removeID(userID));
+                FormUtils.sendQuestionEmbed(channel, userID);
             }
         }
         else if (content.startsWith("/cancelar")) {
@@ -32,13 +32,13 @@ public class FormSubmit extends ListenerAdapter {
         } else {
             if (!FormUtils.hasThread(userID)) return;
             FormUtils.addAnswer(userID, content);
-            if (FormUtils.getQuestionNumber(userID) == 5) {
+            if (FormUtils.getQuestionNumber(userID) == FormQuestions.values().length) {
                 FormUtils.validateForm(event.getAuthor());
                 FormUtils.removeID(userID);
                 channel.sendMessage("Você concluiu o formulário e suas respostas foram enviadas à nossa equipe.").queue(null, null);
                 return;
             }
-            channel.sendMessage(FormUtils.getQuestionNumber(userID) + " numero questao").queue(null, err -> FormUtils.removeID(userID));
+            FormUtils.sendQuestionEmbed(channel, userID);
         }
     }
 }

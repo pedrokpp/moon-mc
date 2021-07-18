@@ -17,6 +17,7 @@ public class FormInitReact extends ListenerAdapter {
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
         if (!event.getChannel().getId().equals(Config.formChannelID)) return;
         if (!event.getReaction().getReactionEmote().isEmoji()) return;
+        if (event.getUser().isBot()) return;
 
         if (event.getReaction().getReactionEmote().getEmoji().equals("📝")) { // formulário de trial
             event.getReaction().removeReaction(event.getUser()).queue();

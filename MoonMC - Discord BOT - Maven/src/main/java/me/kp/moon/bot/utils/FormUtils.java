@@ -2,6 +2,7 @@ package me.kp.moon.bot.utils;
 
 import me.kp.moon.bot.Main;
 import me.kp.moon.bot.enums.GlobalVariables;
+import me.kp.moon.bot.eventos.form.FormQuestions;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -33,8 +34,15 @@ public class FormUtils {
         return -1;
     }
 
-    public static String getQuestionText(String id) {
-        return "";
+    public static void sendQuestionEmbed(MessageChannel channel, String id) {
+        int num = getQuestionNumber(id);
+        EmbedBuilder embedBuilder = new EmbedBuilder()
+                .setTitle("🚀 QUESTÃO " + (num + 1))
+                .addField(FormQuestions.getQuestionText(num), "``` ```", true)
+                .setTimestamp(OffsetDateTime.now())
+                .setFooter("MoonMC - Sistema de Formulários", "https://cdn.discordapp.com/icons/753798848903905350/a_bdb67f83e73a1634305aee789bf71c80.gif")
+                .setColor(GlobalVariables.mainColor);
+        channel.sendMessage(embedBuilder.build()).queue(null, err -> removeID(id));
     }
 
     public static void addAnswer(String id, String answer) {
@@ -60,9 +68,9 @@ public class FormUtils {
         embedBuilder.setColor(GlobalVariables.mainColor);
         embedBuilder.setTimestamp(OffsetDateTime.now());
         embedBuilder.setFooter(id);
-        int counter = 1;
+        int counter = 0;
         for (String resposta : respostas) {
-            embedBuilder.addField("QUESTÃO " + counter, "``" + resposta + "``", false);
+            embedBuilder.addField(FormQuestions.getQuestionText(counter), "``" + resposta + "``", false);
             counter++;
         }
         channel.sendMessage(embedBuilder.build()).queue(msg -> {
