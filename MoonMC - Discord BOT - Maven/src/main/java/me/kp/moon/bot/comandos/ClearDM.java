@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ClearDM extends ListenerAdapter {
 
@@ -26,10 +27,13 @@ public class ClearDM extends ListenerAdapter {
             OffsetDateTime twoWeeksAgo = OffsetDateTime.now().minus(2, ChronoUnit.WEEKS);
 
             messages.forEach(msg -> {
-                if (msg.getAuthor().isBot() && !msg.getTimeCreated().isBefore(twoWeeksAgo)){
+                if (msg.getAuthor().isBot() && !msg.getTimeCreated().isBefore(twoWeeksAgo)) {
                     msg.delete().queue();
                 }
             });
+            channel.sendMessage("Mensagens limpas. Caso haja mais mensagens, execute o comando novamente.").queue(
+                    msg -> msg.delete().queueAfter(5, TimeUnit.SECONDS)
+            );
             BotUtils.clearingDM = false;
         }
     }
