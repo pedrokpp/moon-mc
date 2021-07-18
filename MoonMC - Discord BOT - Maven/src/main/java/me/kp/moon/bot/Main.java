@@ -2,6 +2,7 @@ package me.kp.moon.bot;
 
 import me.kp.moon.bot.comandos.PingarTicket;
 import me.kp.moon.bot.comandos.ClearDM;
+import me.kp.moon.bot.comandos.SetupForm;
 import me.kp.moon.bot.comandos.SetupTicket;
 import me.kp.moon.bot.eventos.form.FormInitReact;
 import me.kp.moon.bot.eventos.form.FormReview;
@@ -46,6 +47,7 @@ public class Main {
         jda.addEventListener(new FormSubmit());
         jda.addEventListener(new FormInitReact());
         jda.addEventListener(new FormReview());
+        jda.addEventListener(new SetupForm());
     }
 
 }
