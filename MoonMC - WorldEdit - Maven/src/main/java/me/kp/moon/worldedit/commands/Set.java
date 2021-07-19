@@ -40,8 +40,15 @@ public class Set implements CommandExecutor {
                 return true;
             }
 
-            int quantity = (int) playerData.pos1.distance(playerData.pos2);
-            player.sendMessage("§aIniciando edição de §e" + quantity + " blocos§a.");
+            double x = Math.abs(playerData.pos1.getX() - playerData.pos2.getX());
+            double y = Math.abs(playerData.pos1.getY() - playerData.pos2.getY());
+            double z = Math.abs(playerData.pos1.getZ() - playerData.pos2.getZ());
+            double volume = x * y * z;
+            if (volume > 15.000) {
+                player.sendMessage("§cVocê não pode editar mais de 15.000 blocos. §7(Atual: " + volume + " blocos)");
+                return true;
+            }
+            player.sendMessage("§aIniciando edição de §e" + (int) volume + " blocos§a.");
             WorldEditUtils.setBlocks(Material.GLASS, 0, playerData.pos1, playerData.pos2);
         }
         return false;
