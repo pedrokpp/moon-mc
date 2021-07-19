@@ -19,7 +19,7 @@ import javax.security.auth.login.LoginException;
 public class Main {
 
     public static JDA jda;
-    private static final boolean devMode = true; // TODO LEMBRAR DE TIRAR PARA PROD.
+    private static final boolean devMode = false; // TODO LEMBRAR DE TIRAR PARA PROD.
 
     private static boolean setJDA() {
         try {
