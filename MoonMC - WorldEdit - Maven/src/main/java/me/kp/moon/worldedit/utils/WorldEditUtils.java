@@ -17,6 +17,7 @@ public class WorldEditUtils {
     private static final ItemStack wand = new ItemStack(Material.WOOD_AXE, 1);
     public static final List<String> wandNames = Arrays.asList("sucesso das 9inha", "fica tranquilo, estou aqui", "chora não bb", "larga as pantufa", "te fraga, sem banho");
     public static ItemStack getWand() {
+
         ItemStack privateWand = wand;
         ItemMeta wandMeta = wand.getItemMeta();
         wandMeta.setDisplayName("§9" + wandNames.get(new Random().nextInt(wandNames.size())));
