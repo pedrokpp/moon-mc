@@ -30,15 +30,13 @@ public class FormReview extends ListenerAdapter {
                 if (footer == null) return;
                 String targetID = footer.getText();
                 if (targetID == null) return;
-                User reviewedUser = Main.jda.getUserById(targetID);
                 boolean aprovado = emoji.equals("✅");
                 Color color = aprovado ? Color.GREEN : Color.RED;
                 String state = aprovado ? "aprovado" : "reprovado";
-                String userMention = reviewedUser == null ? "?" : reviewedUser.getAsMention();
                 msg.editMessage(new EmbedBuilder()
                         .setTitle("🚀 MoonMC - Sistema de Formulários")
                         .setColor(color)
-                        .setDescription(userMention + " foi " + state + " por " + event.getUser().getAsMention())
+                        .setDescription("``" + targetID + "`` foi " + state + " por " + event.getUser().getAsMention())
                         .setTimestamp(OffsetDateTime.now())
                 .build()).queue();
                 msg.getReactions().forEach(reaction -> reaction.removeReaction().queue());

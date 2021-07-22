@@ -64,10 +64,10 @@ public class FormUtils {
         List<String> respostas = formHashMap.get(id);
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("🚀 MoonMC - Sistema de Formulários");
-        embedBuilder.setDescription("Formulário recebido de " + user.getAsMention());
+        embedBuilder.setDescription("Formulário recebido de ``" + user.getAsTag() + "``");
         embedBuilder.setColor(GlobalVariables.mainColor);
         embedBuilder.setTimestamp(OffsetDateTime.now());
-        embedBuilder.setFooter(id);
+        embedBuilder.setFooter(user.getAsTag());
         int counter = 0;
         for (String resposta : respostas) {
             embedBuilder.addField(FormQuestions.getQuestionText(counter), "``" + resposta + "``", false);
