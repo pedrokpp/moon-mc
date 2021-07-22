@@ -4,6 +4,7 @@ import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.settings.PacketEventsSettings;
 import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import me.kp.moon.moonlobby.listeners.PlayerJoinQuit;
+import me.kp.moon.moonlobby.listeners.PlayerListener;
 import me.kp.moon.moonlobby.listeners.ServerListener;
 import me.kp.moon.moonlobby.npc.PacketListener;
 import org.bukkit.Bukkit;
@@ -47,6 +48,7 @@ public final class Main extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new PlayerJoinQuit(), this);
         pluginManager.registerEvents(new ServerListener(), this);
+        pluginManager.registerEvents(new PlayerListener(), this);
     }
 
     private void registerCommands() {
