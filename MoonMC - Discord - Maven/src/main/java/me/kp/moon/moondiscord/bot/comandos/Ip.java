@@ -34,8 +34,6 @@ public class Ip extends ListenerAdapter {
             return;
         }
 
-        Member member = e.getMember();
-
         if (args.startsWith(BotUtils.PREFIX + "ip") || args.startsWith("+ip") || args.startsWith("!ip")) {
             int onlinePlayers = Bukkit.getOnlinePlayers().size();
             int pingMedio = onlinePlayers == 0 ? 0 : getPingMedio();
@@ -46,7 +44,7 @@ public class Ip extends ListenerAdapter {
 
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle(":rocket: MoonMC - Informações")
-                    .setDescription("Informaçoes referentes ao ip ``moon-mc.com``\n\nEntre no servidor e participe das estatísticas!")
+                    .setDescription("Informações referentes ao ip ``moon-mc.net``\n\nEntre no servidor e participe das estatísticas!")
                     .addField("Quantos players online?", "``" +
                             onlinePlayers +
                             " players``", false)

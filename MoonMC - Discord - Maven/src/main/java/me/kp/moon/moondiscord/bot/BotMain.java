@@ -25,7 +25,7 @@ public class BotMain {
                 .addEventListeners(new Sync())
                 .addEventListeners(new CheckStaff())
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
-                .setActivity(Activity.playing("no moon-mc.com"))
+                .setActivity(Activity.playing("no moon-mc.net"))
                 .build();
 
         jda.awaitReady();
