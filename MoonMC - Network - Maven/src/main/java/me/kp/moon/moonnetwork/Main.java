@@ -1,4 +1,4 @@
-package me.kp.moon.network;
+package me.kp.moon.moonnetwork;
 
 import net.md_5.bungee.api.plugin.Plugin;
 
