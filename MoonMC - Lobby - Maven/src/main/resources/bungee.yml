@@ -1,4 +1,0 @@
-name: MoonLobby
-version: ${project.version}
-main: me.kp.moon.lobby.Main
-description: Lobby

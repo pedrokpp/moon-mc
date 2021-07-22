@@ -1,0 +1,5 @@
+name: MoonLobby
+version: ${project.version}
+main: me.kp.moon.moonlobby.Main
+api-version: 1.8.8
+authors: [ pedrokp ]
