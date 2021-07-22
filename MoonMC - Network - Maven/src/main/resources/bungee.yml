@@ -1,0 +1,3 @@
+name: MoonNetwork
+version: ${project.version}
+main: me.kp.moon.network.Main
