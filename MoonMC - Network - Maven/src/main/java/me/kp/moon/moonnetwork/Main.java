@@ -13,4 +13,9 @@ public final class Main extends Plugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
+
+    private void registerCommands() {
+
+    }
+
 }
