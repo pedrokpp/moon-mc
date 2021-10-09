@@ -3,6 +3,8 @@ Esse repositório é destinado aos plugins do MoonMC.
 
 **OBS:** Nenhuma informação como tokens, url de webhooks ou acesso ao banco de dados funciona mais.
 
+### Lembre-se de rodar o script `setup-maven` para adicionar PaperSpigot 1.8.8 como repositório privado para utilizar normalmente nos projetos caso queira compila-los
+
 ## Plugins
 
 - ### MoonBans
