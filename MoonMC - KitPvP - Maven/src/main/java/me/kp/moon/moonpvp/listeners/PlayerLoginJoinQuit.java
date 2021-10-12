@@ -5,7 +5,6 @@ import me.kp.moon.moonpvp.api.ScoreAPI;
 import me.kp.moon.moonpvp.api.TagAPI;
 import me.kp.moon.moonpvp.cache.PlayerCache;
 import me.kp.moon.moonpvp.cache.SysCache;
-import me.kp.moon.moonpvp.clan.ClanSQL;
 import me.kp.moon.moonpvp.data.PlayerData;
 import me.kp.moon.moonpvp.data.PlayerDataManager;
 import me.kp.moon.moonpvp.kit.GladiatorUtils;
@@ -65,9 +64,6 @@ public class PlayerLoginJoinQuit implements Listener {
             player.kickPlayer("§cOcorreu um erro.");
             return;
         }
-        String clanTag = ClanSQL.getClanTag(player);
-        if (clanTag != null)
-            playerData.setCacheLastClan("§" + ClanSQL.getClanColor(clanTag) + "[" + clanTag + "]");
         else playerData.setCacheLastClan("");
         playerData.setUsername(player.getName());
         if (PlayerCache.cacheSoupType.containsKey(player.getName()))
