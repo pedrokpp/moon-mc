@@ -7,6 +7,8 @@ Esse repositório é destinado aos plugins do MoonMC.
 
 Script disponível em `bash` e `batch`
 
+## Veja aqui e leia [como fazer o setup do banco de dados do plugin de KitPvP](https://github.com/pedrokpp/moon-mc/releases/tag/KitPvP)
+
 ## Plugins
 
 - ### MoonBans
